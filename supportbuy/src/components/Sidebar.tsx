@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { FaHome, FaUserFriends, FaUsers, FaShoppingCart, FaChartBar } from 'react-icons/fa';
 
 const Sidebar: React.FC = () => {
   return (
@@ -8,7 +7,6 @@ const Sidebar: React.FC = () => {
         <li>
           <Link href="/dashboard">
             <span className="flex items-center space-x-2">
-              <FaHome className="w-6 h-6" />
               <span>Dashboard</span>
             </span>
           </Link>
@@ -16,7 +14,6 @@ const Sidebar: React.FC = () => {
         <li>
           <Link href="/leads">
             <span className="flex items-center space-x-2">
-              <FaUserFriends className="w-6 h-6" />
               <span>Leads</span>
             </span>
           </Link>
@@ -24,7 +21,6 @@ const Sidebar: React.FC = () => {
         <li>
           <Link href="/customers">
             <span className="flex items-center space-x-2">
-              <FaUsers className="w-6 h-6" />
               <span>Customers</span>
             </span>
           </Link>
@@ -32,7 +28,6 @@ const Sidebar: React.FC = () => {
         <li>
           <Link href="/orders">
             <span className="flex items-center space-x-2">
-              <FaShoppingCart className="w-6 h-6" />
               <span>Orders</span>
             </span>
           </Link>
@@ -40,7 +35,6 @@ const Sidebar: React.FC = () => {
         <li>
           <Link href="/finance">
             <span className="flex items-center space-x-2">
-              <FaChartBar className="w-6 h-6" />
               <span>Finance</span>
             </span>
           </Link>
