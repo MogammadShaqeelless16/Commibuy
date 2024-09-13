@@ -1,0 +1,61 @@
+/* src/components/Menu.css */
+
+.menu {
+    background: #333;
+    color: #fff;
+    padding: 10px 0;
+  }
+  
+  .menu .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+  }
+  
+  .menu .logo {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: #fff;
+  }
+  
+  .menu .logo-image {
+    height: 40px;
+    margin-right: 10px;
+  }
+  
+  .menu .logo-text {
+    font-size: 24px;
+    font-weight: bold;
+  }
+  
+  .menu .menu-items {
+    list-style: none;
+    display: flex;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .menu .menu-items li {
+    margin: 0 15px;
+  }
+  
+  .menu .menu-items a {
+    color: #fff;
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    font-weight: 500;
+  }
+  
+  .menu .menu-items a:hover {
+    color: #00c6ff;
+  }
+  
+  .menu .menu-items svg {
+    margin-right: 8px;
+  }
+  
