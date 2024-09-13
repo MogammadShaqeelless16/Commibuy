@@ -1,26 +1,8 @@
-# SupportBuy
+# React + Vite
 
-**SupportBuy** is a dynamic platform designed to connect users with local businesses through customizable landing pages. Each business on the platform has its own unique page that can be accessed via a custom URL, enabling seamless navigation and enhanced visibility.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Features
+Currently, two official plugins are available:
 
-- **Dynamic Routing:** Customizable landing pages for each business with URLs like `SupportBuy/business-name`.
-- **Server-Side Rendering:** Fast and SEO-friendly pages rendered on the server.
-- **Static Site Generation:** Efficient static pages for businesses with less frequent updates.
-- **API Integration:** Fetch and display business data from APIs or databases.
-- **Performance Optimization:** Includes automatic code splitting, image optimization, and other performance improvements.
-
-## Getting Started
-
-### Prerequisites
-
-- [Node.js](https://nodejs.org/) (v14 or later)
-- [npm](https://www.npmjs.com/get-npm) or [Yarn](https://yarnpkg.com/) package manager
-
-### Installation
-
-1. **Clone the repository:**
-
-   ```bash
-   git clone https://github.com/yourusername/SupportBuy.git
-   cd SupportBuy
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
