@@ -1,7 +1,9 @@
+// src/pages/ShopsPage.jsx
+
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { supabase } from '../supabase/supabaseClient';
-import './ShopsPage.css'; // Create this CSS file
+import './ShopsPage.css'; // Make sure this CSS file is updated
 
 function ShopsPage() {
   const [shops, setShops] = useState([]);
@@ -23,13 +25,22 @@ function ShopsPage() {
     <div className="shops-page">
       <h1>Shops</h1>
       <div className="shops-list">
-        {shops.map(shop => (
-          <div key={shop.id} className="shop-card">
-            <h2>{shop.name}</h2>
-            <p>{shop.address}</p>
-            <Link to={`/shops/${shop.slug}`}>View Details</Link>
-          </div>
-        ))}
+        {shops.length ? (
+          shops.map(shop => (
+            <div key={shop.id} className="shop-card">
+              <div className="shop-header">
+                {shop.header_image && <img src={shop.header_image} alt="Shop Header" />}
+              </div>
+              <div className="shop-info">
+                <h2>{shop.name}</h2>
+                <p>{shop.address}</p>
+                <Link to={`/shops/${shop.slug}`} className="btn">View Details</Link>
+              </div>
+            </div>
+          ))
+        ) : (
+          <p>No shops available.</p>
+        )}
       </div>
     </div>
   );

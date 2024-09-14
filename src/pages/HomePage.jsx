@@ -31,7 +31,7 @@ function HomePage() {
         <h2>Our Mission</h2>
         <p>
           At SupportBuy, our mission is to connect local businesses with customers like you. 
-          We aim to support small businesses in Cape Town by providing a platform where they 
+          We aim to support small businesses in South Africa by providing a platform where they 
           can showcase their products and thrive in the online marketplace.
         </p>
       </section>

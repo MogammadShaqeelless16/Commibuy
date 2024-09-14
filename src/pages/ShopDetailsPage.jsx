@@ -67,10 +67,26 @@ function ShopDetailsPage() {
             <span>Registered: {shop.registered ? 'Yes' : 'No'}</span>
           </div>
           <div className="social-media">
-            {shop.social_media_facebook && <a href={shop.social_media_facebook} target="_blank" rel="noopener noreferrer"><FaFacebook /></a>}
-            {shop.social_media_twitter && <a href={shop.social_media_twitter} target="_blank" rel="noopener noreferrer"><FaTwitter /></a>}
-            {shop.social_media_instagram && <a href={shop.social_media_instagram} target="_blank" rel="noopener noreferrer"><FaInstagram /></a>}
-            {shop.social_media_linkedin && <a href={shop.social_media_linkedin} target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>}
+            {shop.social_media_facebook && (
+              <a href={shop.social_media_facebook} target="_blank" rel="noopener noreferrer">
+                <FaFacebook />
+              </a>
+            )}
+            {shop.social_media_twitter && (
+              <a href={shop.social_media_twitter} target="_blank" rel="noopener noreferrer">
+                <FaTwitter />
+              </a>
+            )}
+            {shop.social_media_instagram && (
+              <a href={shop.social_media_instagram} target="_blank" rel="noopener noreferrer">
+                <FaInstagram />
+              </a>
+            )}
+            {shop.social_media_linkedin && (
+              <a href={shop.social_media_linkedin} target="_blank" rel="noopener noreferrer">
+                <FaLinkedin />
+              </a>
+            )}
           </div>
         </div>
       </header>
