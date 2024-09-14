@@ -1,29 +1,31 @@
-// src/components/Footer.jsx
-
 import React from 'react';
 import { Link } from 'react-router-dom';
-import './Footer.css'; // Create this CSS file
+import './Footer.css'; // Create or update this CSS file
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import Logo from './Logo';
 
 function Footer() {
   return (
     <footer className="footer">
       <div className="container">
-        <div className="footer-logo">
-          <img src="/logo.png" alt="SupportBuy Logo" className="footer-logo-image" />
-          <span className="footer-logo-text">SupportBuy</span>
-        </div>
+      <Link to="/" className="logo">
+          <Logo /> {/* Use the Logo component */}
+        </Link>
         <div className="footer-links">
           <ul>
-            <li><Link to="/">Home</Link></li>
-            <li><Link to="/about">About</Link></li>
-            <li><Link to="/shops">Shops</Link></li>
-            <li><Link to="/login">Login</Link></li>
-            <li><Link to="/signup">Sign Up</Link></li>
+            <li><Link to="/terms-and-conditions">Terms & Conditions</Link></li>
+            <li><Link to="/privacy-policy">Privacy Policy</Link></li>
           </ul>
         </div>
         <div className="footer-info">
           <p>&copy; {new Date().getFullYear()} SupportBuy. All rights reserved.</p>
-          <p>Made with ❤️ in Cape Town.</p>
+          <p>Made by <a href="https://www.softglitchsolutions.com" target="_blank" rel="noopener noreferrer">SoftGlitchSolutions</a></p>
+          <div className="social-media">
+            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer"><FaFacebook /></a>
+            <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer"><FaTwitter /></a>
+            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer"><FaInstagram /></a>
+            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer"><FaLinkedin /></a>
+          </div>
         </div>
       </div>
     </footer>
