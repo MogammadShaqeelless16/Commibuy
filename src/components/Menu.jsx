@@ -27,7 +27,6 @@ function Menu() {
           <li><Link to="/about"><FaInfoCircle /> About</Link></li>
           <li><Link to="/shops"><FaShoppingCart /> Shops</Link></li>
           <li><Link to="/login"><FaSignInAlt /> Login</Link></li>
-          <li><Link to="/signup"><FaUserPlus /> Sign Up</Link></li> {/* Added Sign Up link */}
         </ul>
       </div>
     </nav>
