@@ -1,41 +1,83 @@
 .shop-details-page {
     font-family: Arial, sans-serif;
+    color: #333;
     padding: 20px;
   }
   
   .shop-header {
     position: relative;
     text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .header-image {
+    position: relative;
   }
   
   .header-image img {
     width: 100%;
-    height: auto;
+    height: 300px;
     object-fit: cover;
-    display: block;
+    border-radius: 8px;
   }
   
   .logo-container {
     position: absolute;
-    top: 20px;
-    right: 20px;
+    top: 30%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    overflow: hidden;
+    border: 5px solid #fff; /* Optional: add a border for a clean look */
+    background: #fff; /* Optional: background color for better visibility */
   }
   
   .shop-logo {
-    height: 100px;
-    width: auto;
-    border-radius: 50%;
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
   }
   
   .shop-info {
     position: relative;
-    z-index: 1;
-    margin-top: 20px;
+    padding: 20px;
+    background: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-top: -100px; /* Adjust to overlap the header image */
+    z-index: 1; /* Ensure it overlaps the header image */
+  }
+  
+  .info-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    font-size: 16px;
+  }
+  
+  .info-item svg {
+    margin-right: 10px;
+    font-size: 20px;
+    color: #00c6ff;
+  }
+  
+  .info-item p {
+    margin: 0;
+  }
+  
+  .social-media {
+    margin-top: 15px;
   }
   
   .social-media a {
+    color: #333;
     font-size: 24px;
     margin: 0 10px;
+    transition: color 0.3s;
+  }
+  
+  .social-media a:hover {
+    color: #00c6ff;
   }
   
   .products-section {
@@ -49,27 +91,29 @@
   }
   
   .product-card {
-    background: #f9f9f9;
+    background: #fff;
     border: 1px solid #ddd;
     border-radius: 8px;
     padding: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     width: calc(33.333% - 20px);
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
-  }
-  
-  .product-card:hover {
-    transform: scale(1.03);
+    box-sizing: border-box;
+    text-align: center;
   }
   
   .product-image img {
-    width: 100%;
+    max-width: 100%;
     height: auto;
-    object-fit: cover;
     border-radius: 8px;
   }
   
-  .product-card h3 {
-    margin: 10px 0;
+  @media (max-width: 768px) {
+    .products-list {
+      flex-direction: column;
+    }
+  
+    .product-card {
+      width: 100%;
+    }
   }
   

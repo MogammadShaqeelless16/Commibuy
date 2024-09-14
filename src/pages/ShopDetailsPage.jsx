@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '../supabase/supabaseClient';
-import './ShopDetailsPage.css'; // Create this CSS file
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
+import './ShopDetailsPage.css'; // Ensure this CSS file is updated accordingly
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
 
 function ShopDetailsPage() {
   const { shopSlug } = useParams(); // Get shopSlug from URL parameters
@@ -45,17 +45,27 @@ function ShopDetailsPage() {
   return (
     <div className="shop-details-page">
       <header className="shop-header">
-        <div className="header-image">
-          {shop.header_image && <img src={shop.header_image} alt="Shop Header" />}
+        {shop.header_image && (
+          <div className="header-image">
+            <img src={shop.header_image} alt="Shop Header" />
+          </div>
+        )}
+        <div className="logo-container">
+          {shop.logo && <img src={shop.logo} alt="Shop Logo" className="shop-logo" />}
         </div>
         <div className="shop-info">
-          <div className="logo-container">
-            {shop.logo && <img src={shop.logo} alt="Shop Logo" className="shop-logo" />}
-          </div>
           <h1>{shop.name}</h1>
-          <p>{shop.address}</p>
-          <p>Contact: {shop.contact_number}</p>
-          <p>Registered: {shop.registered ? 'Yes' : 'No'}</p>
+          <div className="info-item">
+            <FaMapMarkerAlt />
+            <p>{shop.address}</p>
+          </div>
+          <div className="info-item">
+            <FaPhoneAlt />
+            <p>{shop.contact_number}</p>
+          </div>
+          <div className="info-item">
+            <span>Registered: {shop.registered ? 'Yes' : 'No'}</span>
+          </div>
           <div className="social-media">
             {shop.social_media_facebook && <a href={shop.social_media_facebook} target="_blank" rel="noopener noreferrer"><FaFacebook /></a>}
             {shop.social_media_twitter && <a href={shop.social_media_twitter} target="_blank" rel="noopener noreferrer"><FaTwitter /></a>}
@@ -70,9 +80,11 @@ function ShopDetailsPage() {
           {products.length ? (
             products.map(product => (
               <div key={product.id} className="product-card">
-                <div className="product-image">
-                  {product.image_url && <img src={product.image_url} alt={product.name} />}
-                </div>
+                {product.image_url && (
+                  <div className="product-image">
+                    <img src={product.image_url} alt={product.name} />
+                  </div>
+                )}
                 <h3>{product.name}</h3>
                 <p>{product.description}</p>
                 <p>Price: ${product.price}</p>
