@@ -10,6 +10,7 @@ import LoginPage from './pages/LoginPage';
 import SignUpPage from './pages/SignUpPage';
 import ForgotPasswordPage from './pages/ForgotPasswordPage';
 import ShopsPage from './pages/ShopsPage';
+import ShopDetailsPage from './pages/ShopDetailsPage';
 
 function App() {
   return (
@@ -23,6 +24,7 @@ function App() {
           <Route path="/signup" element={<SignUpPage />} />
           <Route path="/forgot-password" element={<ForgotPasswordPage />} />
           <Route path="/shops" element={<ShopsPage />} />
+          <Route path="/shops/:shopSlug" element={<ShopDetailsPage />} />
         </Routes>
       </main>
       <Footer /> 

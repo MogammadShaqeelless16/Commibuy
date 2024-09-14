@@ -1,26 +1,36 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { supabase } from '../supabase/supabaseClient';
+import './ShopsPage.css'; // Create this CSS file
 
 function ShopsPage() {
-  const [location, setLocation] = useState(''); // Placeholder for actual location data
-  const [shops, setShops] = useState([]); // Placeholder for shops data
+  const [shops, setShops] = useState([]);
 
-  // Function to fetch location and shops data
-  const fetchShops = () => {
-    // Placeholder for fetching location and shop data
-    setLocation('Your Location'); // Simulate location data
-    setShops([{ name: 'Shop 1' }, { name: 'Shop 2' }]); // Simulate shops data
-  };
+  useEffect(() => {
+    async function fetchShops() {
+      const { data: shopsData, error } = await supabase.from('shops').select('*');
+      if (error) {
+        console.error('Error fetching shops:', error);
+      } else {
+        setShops(shopsData);
+      }
+    }
+
+    fetchShops();
+  }, []);
 
   return (
     <div className="shops-page">
-      <h1>Shops Near You</h1>
-      <button onClick={fetchShops}>Find Shops</button>
-      <p>Your Location: {location}</p>
-      <ul>
-        {shops.map((shop, index) => (
-          <li key={index}>{shop.name}</li>
+      <h1>Shops</h1>
+      <div className="shops-list">
+        {shops.map(shop => (
+          <div key={shop.id} className="shop-card">
+            <h2>{shop.name}</h2>
+            <p>{shop.address}</p>
+            <Link to={`/shops/${shop.slug}`}>View Details</Link>
+          </div>
         ))}
-      </ul>
+      </div>
     </div>
   );
 }

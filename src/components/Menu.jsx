@@ -1,6 +1,9 @@
+// src/components/Menu.jsx
+
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { FaHome, FaInfoCircle, FaSignInAlt, FaUserPlus, FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa';
+import Logo from './Logo'; // Import the Logo component
 import './Menu.css'; // Make sure to create this CSS file
 
 function Menu() {
@@ -14,8 +17,7 @@ function Menu() {
     <nav className="menu">
       <div className="container">
         <Link to="/" className="logo">
-          <img src="/logo.png" alt="SupportBuy Logo" className="logo-image" />
-          <span className="logo-text">SupportBuy</span>
+          <Logo /> {/* Use the Logo component */}
         </Link>
         <button className="menu-toggle" onClick={toggleMenu}>
           {isOpen ? <FaTimes /> : <FaBars />}
@@ -25,6 +27,7 @@ function Menu() {
           <li><Link to="/about"><FaInfoCircle /> About</Link></li>
           <li><Link to="/shops"><FaShoppingCart /> Shops</Link></li>
           <li><Link to="/login"><FaSignInAlt /> Login</Link></li>
+          <li><Link to="/signup"><FaUserPlus /> Sign Up</Link></li> {/* Added Sign Up link */}
         </ul>
       </div>
     </nav>

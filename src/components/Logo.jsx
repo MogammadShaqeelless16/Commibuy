@@ -1,9 +1,13 @@
+// src/components/Logo.jsx
+
 import React from 'react';
+import logo from '../assets/logo.png'; // Adjust the path based on your folder structure
+import './Logo.css'; // Ensure you create this CSS file for styling
 
 function Logo() {
   return (
     <div className="logo">
-      <h1>SupportBuy</h1>
+      <img src={logo} alt="SupportBuy Logo" className="logo-image" />
     </div>
   );
 }
