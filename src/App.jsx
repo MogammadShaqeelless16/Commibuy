@@ -1,6 +1,9 @@
+// src/App.jsx
+
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Menu from './components/Menu';
+import Footer from './components/Footer'; // Import Footer
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import LoginPage from './pages/LoginPage';
@@ -22,6 +25,7 @@ function App() {
           <Route path="/shops" element={<ShopsPage />} />
         </Routes>
       </main>
+      <Footer /> 
     </Router>
   );
 }

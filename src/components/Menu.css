@@ -4,6 +4,7 @@
     background: #333;
     color: #fff;
     padding: 10px 0;
+    position: relative;
   }
   
   .menu .container {
@@ -37,6 +38,8 @@
     display: flex;
     margin: 0;
     padding: 0;
+    transition: max-height 0.3s ease-out;
+    overflow: hidden;
   }
   
   .menu .menu-items li {
@@ -57,5 +60,71 @@
   
   .menu .menu-items svg {
     margin-right: 8px;
+  }
+  
+  /* Hamburger menu styles */
+  .menu .menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    cursor: pointer;
+  }
+  
+  .menu .menu-items.open {
+    max-height: 500px; /* Adjust this value as needed */
+  }
+  
+  /* Mobile view adjustments */
+  @media (max-width: 768px) {
+    .menu .container {
+      flex-direction: column;
+      align-items: flex-start;
+    }
+  
+    .menu .logo {
+      margin-bottom: 10px;
+    }
+  
+    .menu .menu-items {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      max-height: 0;
+      overflow: hidden;
+    }
+  
+    .menu .menu-items li {
+      margin: 10px 0;
+    }
+  
+    .menu .menu-items a {
+      font-size: 18px;
+      padding: 10px 20px;
+    }
+  
+    .menu .menu-toggle {
+      display: block;
+    }
+  
+    .menu .menu-items.open {
+      max-height: 500px; /* Adjust this value as needed */
+    }
+  }
+  
+  /* Additional responsiveness for smaller screens */
+  @media (max-width: 480px) {
+    .menu .logo-text {
+      font-size: 20px;
+    }
+  
+    .menu .logo-image {
+      height: 30px;
+    }
+  
+    .menu .menu-items a {
+      font-size: 16px;
+    }
   }
   
