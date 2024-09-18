@@ -18,7 +18,7 @@ function SignUpPage() {
     setSuccess('');
 
     try {
-      // Sign up the user in Supabase Auth
+      // Step 1: Sign up the user in Supabase Auth
       const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
@@ -26,40 +26,32 @@ function SignUpPage() {
 
       if (signUpError) throw signUpError;
 
-      // Notify user to check email for verification
-      setSuccess('Sign-up successful! Please check your email to verify your account.');
+      const user = signUpData.user;
+      if (!user) {
+        throw new Error('Sign-up successful, but user data is not available');
+      }
 
-      // Handle additional steps after email verification
-      // This usually involves sending a separate API request to check if the email is verified
-      // For simplicity, let's assume we have an email verification step later
-
-    } catch (error) {
-      setError(error.message || 'Error signing up');
-    }
-  };
-
-  // This would be part of a verification process you set up separately
-  const handleEmailVerification = async (userId) => {
-    try {
-      // Insert additional user details into the custom users table
+      // Step 2: Insert additional user details into the custom "users" table
       const { error: insertError } = await supabase
-        .from('users')
+        .from('users') // Custom "users" table in your public schema
         .insert([
           {
-            uuid: userId,
             email,
             username,
             display_name: displayName,
             phone_number: phoneNumber,
             id_number: idNumber,
+            // No need to specify 'id' as it's auto-generated
           },
         ]);
 
       if (insertError) throw insertError;
 
-      setSuccess('User details added successfully.');
+      // Step 3: Notify user to check email for verification
+      setSuccess('Sign-up successful! Please check your email to verify your account.');
+
     } catch (error) {
-      setError(error.message || 'Error adding user details');
+      setError(error.message || 'Error signing up');
     }
   };
 

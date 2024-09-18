@@ -79,3 +79,61 @@ export const updateUser = async (user) => {
     return null;
   }
 };
+
+
+export const checkAuth = async () => {
+    const { data, error } = await supabase.auth.getSession();
+    if (error) {
+      console.error('Error checking authentication:', error);
+      return false;
+    }
+    return data?.session ? true : false; // Return true if there's a session (authenticated)
+  };
+  
+  // Sign out the user
+  export const signOutUser = async () => {
+    const { error } = await supabase.auth.signOut();
+    if (error) {
+      console.error('Error signing out:', error);
+    }
+  };
+
+  // Fetch the currently signed-in user's profile
+export const fetchCurrentUser = async () => {
+    const { data: session, error: sessionError } = await supabase.auth.getSession();
+  
+    if (sessionError || !session?.session) {
+      console.error('Error fetching user session:', sessionError);
+      return null;
+    }
+  
+    const userId = session.session.user.id; // Get the user's ID from the session
+  
+    const { data: userProfile, error } = await supabase
+      .from('users') // Adjust to your actual table name if necessary
+      .select('*')
+      .eq('id', userId)
+      .single();
+  
+    if (error) {
+      console.error('Error fetching user profile:', error);
+      return null;
+    }
+  
+    return userProfile;
+  };
+  
+  // Update the current user's profile
+  export const updateUserProfile = async (userId, formData) => {
+    const { error } = await supabase
+      .from('users') // Adjust this to your actual users table
+      .update(formData)
+      .eq('id', userId);
+  
+    if (error) {
+      console.error('Error updating user profile:', error);
+      return false;
+    }
+  
+    return true;
+  };

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../../supabase/supabaseClient'; // Adjust the path as needed
+import { fetchCurrentUser, updateUserProfile } from '../../supabase/userOperations'; // Adjust the path as needed
 import './MyProfilePage.css';
 
 function MyProfilePage() {
@@ -12,19 +12,12 @@ function MyProfilePage() {
 
   useEffect(() => {
     async function fetchProfile() {
-      const { data: profileData, error } = await supabase
-        .from('users') // Replace with your table name
-        .select('*')
-        .eq('id', supabase.auth.user().id)
-        .single();
-
-      if (error) {
-        console.error('Error fetching profile:', error);
-      } else {
-        setProfile(profileData);
+      const userProfile = await fetchCurrentUser(); // Use the helper function
+      if (userProfile) {
+        setProfile(userProfile);
         setFormData({
-          name: profileData.name,
-          email: profileData.email
+          name: userProfile.name,
+          email: userProfile.email
         });
       }
     }
@@ -40,16 +33,14 @@ function MyProfilePage() {
   };
 
   const handleSave = async () => {
-    const { error } = await supabase
-      .from('profiles') // Replace with your table name
-      .update(formData)
-      .eq('id', supabase.auth.user().id);
-
-    if (error) {
-      console.error('Error updating profile:', error);
-    } else {
-      setProfile(formData);
-      setIsEditing(false);
+    if (profile && profile.id) {
+      const success = await updateUserProfile(profile.id, formData); // Use the helper function
+      if (success) {
+        setProfile(formData); // Update the profile state with the new data
+        setIsEditing(false); // Exit editing mode
+      } else {
+        console.error('Error updating profile');
+      }
     }
   };
 
