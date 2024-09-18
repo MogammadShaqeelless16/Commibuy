@@ -8,7 +8,7 @@ function BusinessManagementPage() {
   useEffect(() => {
     async function fetchBusinesses() {
       const { data: businessesData, error } = await supabase
-        .from('shops') // Replace with your table name
+        .from('businesses') // Replace with your table name
         .select('*');
 
       if (error) {

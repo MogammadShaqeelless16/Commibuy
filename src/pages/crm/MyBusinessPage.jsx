@@ -8,7 +8,7 @@ function MyBusinessPage() {
   useEffect(() => {
     async function fetchBusinesses() {
       const { data: businessesData, error } = await supabase
-        .from('shops') // Replace with your table name
+        .from('businesses') // Replace with your table name
         .select('*')
         .eq('user_id', supabase.auth.user().id); // Adjust the query based on your schema
 

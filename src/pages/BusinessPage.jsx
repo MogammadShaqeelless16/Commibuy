@@ -9,7 +9,7 @@ function BusinessPage() {
 
   useEffect(() => {
     async function fetchBusinesses() {
-      const { data: businessesData, error } = await supabase.from('shops').select('*');
+      const { data: businessesData, error } = await supabase.from('businesses').select('*');
       if (error) {
         console.error('Error fetching businesses:', error);
       } else {

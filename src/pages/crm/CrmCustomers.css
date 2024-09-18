@@ -1,0 +1,93 @@
+.crm-customers {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+  
+  .header-actions {
+    display: flex;
+    align-items: center;
+  }
+  
+  .search-input {
+    border: 1px solid #ddd;
+    padding: 8px;
+    border-radius: 4px;
+    margin-right: 15px;
+    font-size: 14px;
+  }
+  
+  .add-customer-button {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    font-size: 14px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .add-customer-button:hover {
+    background-color: #0056b3;
+  }
+  
+  .customers-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .customers-table th,
+  .customers-table td {
+    border: 1px solid #ddd;
+    padding: 10px;
+    text-align: left;
+  }
+  
+  .customers-table th {
+    background-color: #f4f4f4;
+    font-weight: bold;
+  }
+  
+  .customers-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .customers-table tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  .action-button {
+    border: none;
+    padding: 5px 10px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .action-button.edit {
+    background-color: #4caf50;
+    color: white;
+  }
+  
+  .action-button.edit:hover {
+    background-color: #45a049;
+  }
+  
+  .action-button.delete {
+    background-color: #f44336;
+    color: white;
+  }
+  
+  .action-button.delete:hover {
+    background-color: #e53935;
+  }
+  

@@ -14,7 +14,7 @@ function BusinessDetailsPage() {
     async function fetchBusinessDetails() {
       // Fetch business details by slug
       const { data: businessData, error: businessError } = await supabase
-        .from('shops')
+        .from('businesses')
         .select('*')
         .eq('slug', businessSlug)
         .single();

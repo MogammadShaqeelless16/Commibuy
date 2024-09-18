@@ -1,0 +1,56 @@
+.crm-dashboard {
+    padding: 20px;
+    font-family: Arial, sans-serif;
+  }
+  
+  .dashboard-overview {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+  }
+  
+  .dashboard-card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 30%;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  .dashboard-card h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  
+  .dashboard-card p {
+    font-size: 24px;
+    font-weight: bold;
+    color: #007bff;
+    margin: 0;
+  }
+  
+  .dashboard-map-graph {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  
+  .map-container,
+  .graph-container {
+    flex: 1;
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    height: 400px;
+  }
+  
+  .map-container h2,
+  .graph-container h2 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  

@@ -1,4 +1,4 @@
-.crm-orders {
+.crm-leads {
     padding: 20px;
     font-family: Arial, sans-serif;
   }
@@ -23,7 +23,7 @@
     font-size: 14px;
   }
   
-  .add-order-button {
+  .add-lead-button {
     background-color: #007bff;
     color: white;
     border: none;
@@ -34,32 +34,32 @@
     transition: background-color 0.3s;
   }
   
-  .add-order-button:hover {
+  .add-lead-button:hover {
     background-color: #0056b3;
   }
   
-  .orders-table {
+  .leads-table {
     width: 100%;
     border-collapse: collapse;
   }
   
-  .orders-table th,
-  .orders-table td {
+  .leads-table th,
+  .leads-table td {
     border: 1px solid #ddd;
     padding: 10px;
     text-align: left;
   }
   
-  .orders-table th {
+  .leads-table th {
     background-color: #f4f4f4;
     font-weight: bold;
   }
   
-  .orders-table tr:nth-child(even) {
+  .leads-table tr:nth-child(even) {
     background-color: #f9f9f9;
   }
   
-  .orders-table tr:hover {
+  .leads-table tr:hover {
     background-color: #f1f1f1;
   }
   

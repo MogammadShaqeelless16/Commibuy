@@ -13,7 +13,7 @@ function MyProfilePage() {
   useEffect(() => {
     async function fetchProfile() {
       const { data: profileData, error } = await supabase
-        .from('profiles') // Replace with your table name
+        .from('users') // Replace with your table name
         .select('*')
         .eq('id', supabase.auth.user().id)
         .single();

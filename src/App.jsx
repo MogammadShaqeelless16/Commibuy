@@ -1,5 +1,7 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, useLocation } from 'react-router-dom';
+import Menu from './components/Menu';
+import Footer from './components/Footer';
 import HomePage from './pages/HomePage';
 import AboutPage from './pages/AboutPage';
 import LoginPage from './pages/LoginPage';
@@ -19,9 +21,27 @@ import UserManagementPage from './pages/crm/UserManagementPage'; // Add this imp
 import BusinessManagementPage from './pages/crm/BusinessManagementPage'; // Add this import
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
+function LayoutWrapper({ children }) {
+  const location = useLocation();
+  const isBusinessDetailsPage = location.pathname.startsWith('/business/') && location.pathname.length > '/business/'.length;
+  const isCRM = location.pathname.startsWith('/crm/') && location.pathname.length > '/crm/'.length;
+
+  return (
+    <>
+      {/* Conditionally hide the Menu for BusinessDetailsPage and CRM routes */}
+      {!isBusinessDetailsPage && !isCRM && <Menu />}
+      {children}
+      {/* Conditionally hide the Footer for CRM routes */}
+      {!isCRM && <Footer />}
+    </>
+  );
+}
+
 function App() {
   return (
     <Router>
+      <LayoutWrapper>
+        <main>
       <Routes>
         {/* Non-CRM Routes */}
         <Route path="/" element={<HomePage />} />
@@ -45,6 +65,8 @@ function App() {
           <Route path="admin/business-management" element={<BusinessManagementPage />} /> {/* Add Business Management route */}
         </Route>
       </Routes>
+        </main>
+      </LayoutWrapper>
     </Router>
   );
 }
