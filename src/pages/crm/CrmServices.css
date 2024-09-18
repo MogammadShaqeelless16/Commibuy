@@ -1,0 +1,32 @@
+.crm-services {
+    padding: 20px;
+  }
+  
+  .services-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .services-table th, .services-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+  }
+  
+  .services-table th {
+    background-color: #f4f4f4;
+  }
+  
+  .action-button {
+    margin-right: 5px;
+    padding: 5px 10px;
+    border: none;
+    background-color: #007bff;
+    color: white;
+    cursor: pointer;
+  }
+  
+  .action-button:hover {
+    background-color: #0056b3;
+  }
+  

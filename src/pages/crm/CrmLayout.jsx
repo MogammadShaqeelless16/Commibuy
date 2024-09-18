@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, Outlet } from 'react-router-dom';
-import { FaTachometerAlt, FaUsers, FaBoxOpen, FaClipboardList, FaSignOutAlt, FaUserTie, FaUser, FaBusinessTime } from 'react-icons/fa';
+import { 
+  FaTachometerAlt, FaUsers, FaBoxOpen, FaClipboardList, 
+  FaSignOutAlt, FaUserTie, FaUser, FaBusinessTime, FaServicestack 
+} from 'react-icons/fa';
 import './CrmLayout.css';
 
 function CrmLayout() {
@@ -39,6 +42,11 @@ function CrmLayout() {
           <li>
             <Link to="/crm/products">
               <FaBoxOpen /> Products
+            </Link>
+          </li>
+          <li>
+            <Link to="/crm/services">
+              <FaServicestack /> Services
             </Link>
           </li>
           <li>

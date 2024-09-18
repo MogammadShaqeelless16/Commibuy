@@ -19,6 +19,7 @@ import MyBusinessPage from './pages/crm/MyBusinessPage'; // Add this import
 import MyProfilePage from './pages/crm/MyProfilePage'; // Add this import
 import UserManagementPage from './pages/crm/UserManagementPage'; // Add this import
 import BusinessManagementPage from './pages/crm/BusinessManagementPage'; // Add this import
+import CrmServices from './pages/crm/CrmServices'
 import '@fortawesome/fontawesome-free/css/all.min.css';
 
 function LayoutWrapper({ children }) {
@@ -58,6 +59,7 @@ function App() {
           <Route path="customers" element={<CrmCustomers />} />
           <Route path="orders" element={<CrmOrders />} />
           <Route path="products" element={<CrmProducts />} />
+          <Route path="services" element={<CrmServices />} /> {/* Add Services route */}
           <Route path="leads" element={<CrmLeads />} />
           <Route path="my-business" element={<MyBusinessPage />} /> {/* Add My Business route */}
           <Route path="my-profile" element={<MyProfilePage />} /> {/* Add My Profile route */}
