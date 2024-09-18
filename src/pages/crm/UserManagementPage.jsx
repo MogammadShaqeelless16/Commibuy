@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../../supabase/supabaseClient'; // Adjust the path as needed
+import { fetchUsersWithRoles, addUser, updateUser } from '../../supabase/userOperations'; // Adjust the path as needed
+import { fetchBusinesses } from '../../supabase/businessOperations'; // Adjust the path as needed
 import './UserManagementPage.css';
 
 function UserManagementPage() {
@@ -8,139 +9,86 @@ function UserManagementPage() {
   const [userBusinessMapping, setUserBusinessMapping] = useState({});
   const [selectedUser, setSelectedUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
-  const [newUser, setNewUser] = useState({ username: '', email: '', businessIds: [] });
+  const [newUser, setNewUser] = useState({ username: '', email: '', role_id: '', businessIds: [] });
 
   useEffect(() => {
-    async function fetchUsers() {
-      const { data: usersData, error } = await supabase
-        .from('users') // Replace with your table name
-        .select('*');
-      if (error) {
-        console.error('Error fetching users:', error);
-      } else {
-        setUsers(usersData);
-        console.log('Users fetched:', usersData);
+    async function loadData() {
+      try {
+        // Fetch users with roles and businesses
+        const usersData = await fetchUsersWithRoles();
+        if (usersData) {
+          setUsers(usersData);
+  
+          // Prepare user-business mapping (with business names)
+          const mapping = {};
+          usersData.forEach(user => {
+            if (user.users_businesses && user.users_businesses.length > 0) {
+              mapping[user.id] = user.users_businesses.map(ub => ub.businesses.name); // Access the business name directly
+            } else {
+              mapping[user.id] = [];
+            }
+          });
+          setUserBusinessMapping(mapping);
+        }
+  
+        // Fetch businesses
+        const businessesData = await fetchBusinesses();
+        if (businessesData) {
+          setBusinesses(businessesData);
+        }
+      } catch (error) {
+        console.error('Error fetching data:', error);
       }
     }
-
-    async function fetchBusinesses() {
-      const { data: businessesData, error } = await supabase
-        .from('businesses') // Replace with your table name
-        .select('*');
-      if (error) {
-        console.error('Error fetching businesses:', error);
-      } else {
-        setBusinesses(businessesData);
-        console.log('Businesses fetched:', businessesData);
-      }
-    }
-
-    async function fetchUserBusinessMapping() {
-      const { data: userBusinessesData, error } = await supabase
-        .from('users_businesses') // Replace with your table name
-        .select('user_id, business_id');
-
-      if (error) {
-        console.error('Error fetching user-business mapping:', error);
-      } else {
-        console.log('User-business data:', userBusinessesData); // Log the raw data
-        
-        const mapping = {};
-        userBusinessesData.forEach(({ user_id, business_id }) => {
-          if (!mapping[user_id]) mapping[user_id] = [];
-          mapping[user_id].push(business_id);
-        });
-        
-        console.log('User-business mapping:', mapping); // Log the processed mapping
-        setUserBusinessMapping(mapping);
-      }
-    }
-
-    fetchUsers();
-    fetchBusinesses();
-    fetchUserBusinessMapping();
+  
+    loadData();
   }, []);
 
   const handleAddUser = async () => {
-    const { username, email, businessIds } = newUser;
-    const { data: newUserData, error } = await supabase
-      .from('users')
-      .insert([{ username, email }]);
-
-    if (error) {
+    const { username, email, role_id, businessIds } = newUser;
+    try {
+      const newUserData = await addUser({ username, email, role_id, businessIds });
+      if (newUserData) {
+        setNewUser({ username: '', email: '', role_id: '', businessIds: [] });
+        setShowModal(false);
+        // Refresh users data after adding a new user
+        const updatedUsers = await fetchUsersWithRoles();
+        setUsers(updatedUsers);
+      }
+    } catch (error) {
       console.error('Error adding user:', error);
-    } else {
-      const userId = newUserData[0].id;
-      const businessEntries = businessIds.map(businessId => ({
-        user_id: userId,
-        business_id: businessId
-      }));
-      await supabase
-        .from('user_businesses')
-        .insert(businessEntries);
-      
-      setNewUser({ username: '', email: '', businessIds: [] });
-      setShowModal(false);
-      console.log('User added:', newUserData);
     }
   };
 
   const handleEditUser = async () => {
-    const { id, username, email, businessIds } = selectedUser;
-    const { error } = await supabase
-      .from('users')
-      .update({ username, email })
-      .match({ id });
-
-    if (error) {
+    const { id, username, email, role_id, businessIds } = selectedUser;
+    try {
+      const updatedUserData = await updateUser({ id, username, email, role_id, businessIds });
+      if (updatedUserData) {
+        setSelectedUser(null);
+        setShowModal(false);
+        // Refresh users data after updating a user
+        const updatedUsers = await fetchUsersWithRoles();
+        setUsers(updatedUsers);
+      }
+    } catch (error) {
       console.error('Error updating user:', error);
-    } else {
-      await supabase
-        .from('users_businesses')
-        .delete()
-        .match({ user_id: id });
-      
-      const businessEntries = businessIds.map(businessId => ({
-        user_id: id,
-        business_id: businessId
-      }));
-      await supabase
-        .from('users_businesses')
-        .insert(businessEntries);
-      
-      setSelectedUser(null);
-      setShowModal(false);
-      console.log('User updated:', selectedUser);
     }
   };
 
-  const getBusinessNames = (businessIds) => {
-    console.log('Fetching business names for IDs:', businessIds);
-    if (!Array.isArray(businessIds) || businessIds.length === 0) {
-      console.log('No business IDs provided.');
-      return 'No Business';
-    }
-    
-    // Create a map for quick lookup
-    const businessMap = businesses.reduce((map, business) => {
-      map[business.id] = business.name;
-      return map;
-    }, {});
-    
-    const names = businessIds.map(id => businessMap[id] || 'Unknown Business');
-    console.log('Business names:', names);
-    return names.length ? names.join(', ') : 'No Business';
+  const getBusinessNames = (businessNames) => {
+    if (!businessNames || !Array.isArray(businessNames)) return 'No Business';
+    return businessNames.join(', '); // Join business names by a comma
   };
 
   const handleUserClick = (user) => {
-    console.log('User clicked:', user);
-    console.log('Current user-business mapping:', userBusinessMapping);
-    
-    const businessIds = userBusinessMapping[user.id] || [];
-    console.log('Business IDs for user:', businessIds);
-
-    setSelectedUser({ ...user, businessIds });
-    setShowModal(true);
+    if (user) {
+      setSelectedUser({
+        ...user,
+        businessIds: userBusinessMapping[user.id] || []
+      });
+      setShowModal(true);
+    }
   };
 
   return (
@@ -160,36 +108,36 @@ function UserManagementPage() {
             <th>Actions</th>
           </tr>
         </thead>
-        <tbody>
-          {users.length ? (
-            users.map((user) => {
-              const userBusinessIds = userBusinessMapping[user.id] || [];
-              const businessNames = getBusinessNames(userBusinessIds);
-              return (
-                <tr key={user.id} onClick={() => handleUserClick(user)}>
-                  <td>{user.username}</td>
-                  <td>{user.email}</td>
-                  <td>{businessNames || 'No Business'}</td>
-                  <td>
-                    <button
-                      className="action-button edit"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        handleUserClick(user);
-                      }}
-                    >
-                      Edit
-                    </button>
-                  </td>
-                </tr>
-              );
-            })
-          ) : (
-            <tr>
-              <td colSpan="4">No users found.</td>
-            </tr>
-          )}
-        </tbody>
+          <tbody>
+            {users.length ? (
+              users.map((user) => {
+                const businessNames = getBusinessNames(userBusinessMapping[user.id]); // Directly pass the business names
+                return (
+                  <tr key={user.id} onClick={() => handleUserClick(user)}>
+                    <td>{user.username}</td>
+                    <td>{user.email}</td>
+                    <td>{businessNames || 'No Business'}</td>
+                    <td>
+                      <button
+                        className="action-button edit"
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleUserClick(user);
+                        }}
+                      >
+                        Edit
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })
+            ) : (
+              <tr>
+                <td colSpan="4">No users found.</td>
+              </tr>
+            )}
+          </tbody>
+
       </table>
 
       {/* Modal for Editing User */}
@@ -229,6 +177,21 @@ function UserManagementPage() {
                 />
               </div>
               <div className="form-group">
+                <label htmlFor="role_id">Role:</label>
+                <select
+                  id="role_id"
+                  value={selectedUser ? selectedUser.role_id : newUser.role_id}
+                  onChange={(e) => {
+                    const value = e.target.value;
+                    selectedUser
+                      ? setSelectedUser({ ...selectedUser, role_id: value })
+                      : setNewUser({ ...newUser, role_id: value });
+                  }}
+                >
+                  {/* Populate this with role options */}
+                </select>
+              </div>
+              <div className="form-group">
                 <label htmlFor="businesses">Businesses:</label>
                 <select
                   id="businesses"
@@ -238,7 +201,7 @@ function UserManagementPage() {
                     const options = e.target.options;
                     const selectedValues = [];
                     for (let i = 0; i < options.length; i++) {
-                      if (options[i].selected) selectedValues.push(Number(options[i].value));
+                      if (options[i].selected) selectedValues.push(options[i].value);
                     }
                     selectedUser
                       ? setSelectedUser({ ...selectedUser, businessIds: selectedValues })

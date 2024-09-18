@@ -7,26 +7,43 @@ function BusinessManagementPage() {
   const [searchQuery, setSearchQuery] = useState('');
   const [selectedBusiness, setSelectedBusiness] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEditMode, setIsEditMode] = useState(false);  // To distinguish between add and edit
 
   useEffect(() => {
-    async function fetchBusinesses() {
-      const { data: businessesData, error } = await supabase
-        .from('businesses') // Replace with your table name
-        .select('*');
-
-      if (error) {
-        console.error('Error fetching businesses:', error);
-      } else {
-        setBusinesses(businessesData);
-      }
-    }
-
     fetchBusinesses();
   }, []);
 
+  const fetchBusinesses = async () => {
+    const { data: businessesData, error } = await supabase
+      .from('businesses') // Replace with your table name
+      .select('*');
+
+    if (error) {
+      console.error('Error fetching businesses:', error);
+    } else {
+      setBusinesses(businessesData);
+    }
+  };
+
+  // Handle Edit Button click
   const handleEdit = (business) => {
     setSelectedBusiness(business);
     setIsModalOpen(true);
+    setIsEditMode(true); // Enable edit mode
+  };
+
+  // Handle Add Button click
+  const handleAdd = () => {
+    setSelectedBusiness({
+      name: '',
+      address: '',
+      registered: false,
+      active: false,
+      email: '',
+      contact_number: ''
+    });
+    setIsModalOpen(true);
+    setIsEditMode(false); // Disable edit mode for adding a new business
   };
 
   const handleModalClose = () => {
@@ -43,7 +60,8 @@ function BusinessManagementPage() {
   };
 
   const handleSave = async () => {
-    if (selectedBusiness) {
+    if (isEditMode && selectedBusiness) {
+      // Update the selected business
       const { error } = await supabase
         .from('businesses')
         .update({
@@ -61,7 +79,26 @@ function BusinessManagementPage() {
       } else {
         setIsModalOpen(false);
         setSelectedBusiness(null);
-        // Refresh businesses data after update
+        fetchBusinesses();
+      }
+    } else if (selectedBusiness) {
+      // Add a new business
+      const { error } = await supabase
+        .from('businesses')
+        .insert([{
+          name: selectedBusiness.name,
+          address: selectedBusiness.address,
+          registered: selectedBusiness.registered,
+          active: selectedBusiness.active,
+          email: selectedBusiness.email,
+          contact_number: selectedBusiness.contact_number,
+        }]);
+
+      if (error) {
+        console.error('Error adding business:', error);
+      } else {
+        setIsModalOpen(false);
+        setSelectedBusiness(null);
         fetchBusinesses();
       }
     }
@@ -75,6 +112,13 @@ function BusinessManagementPage() {
   return (
     <div className="business-management-page">
       <h1>Business Management</h1>
+
+      {/* Add Business Button */}
+      <div className="header">
+        <button className="add-business-button" onClick={handleAdd}>
+          Add Business
+        </button>
+      </div>
 
       {/* Search Bar */}
       <div className="search-container">
@@ -106,11 +150,11 @@ function BusinessManagementPage() {
         )}
       </div>
 
-      {/* Modal for editing selected business */}
+      {/* Modal for Adding/Editing Business */}
       {isModalOpen && selectedBusiness && (
         <div className="modal">
           <div className="modal-content">
-            <h2>Edit Business</h2>
+            <h2>{isEditMode ? 'Edit Business' : 'Add Business'}</h2>
             <label>
               Name:
               <input
@@ -167,7 +211,7 @@ function BusinessManagementPage() {
             </label>
             <div className="modal-actions">
               <button className="save-button" onClick={handleSave}>
-                Save
+                {isEditMode ? 'Save' : 'Add'}
               </button>
               <button className="cancel-button" onClick={handleModalClose}>
                 Cancel
