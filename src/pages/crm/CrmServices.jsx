@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
-import './CrmServices.css'; // Ensure this CSS file contains styles for table, header, and actions
+import './CrmServices.css'; // Ensure this CSS file contains styles for table, header, hover effect, and modals
 
 function CrmServices() {
   const [services, setServices] = useState([]);
   const [searchQuery, setSearchQuery] = useState('');
   const [showAddServiceModal, setShowAddServiceModal] = useState(false);
+  const [selectedService, setSelectedService] = useState(null);
 
   useEffect(() => {
     // Fetch services from the API or database
@@ -19,9 +20,8 @@ function CrmServices() {
     fetchServices();
   }, []);
 
-  const handleAction = (serviceId, actionType) => {
-    console.log(`Action ${actionType} for service ID ${serviceId}`);
-    // Add your edit/delete logic here
+  const handleRowClick = (service) => {
+    setSelectedService(service);
   };
 
   const filteredServices = services.filter(service =>
@@ -57,21 +57,15 @@ function CrmServices() {
         </thead>
         <tbody>
           {filteredServices.map(service => (
-            <tr key={service.id}>
+            <tr key={service.id} onClick={() => handleRowClick(service)} className="service-row">
               <td>{service.id}</td>
               <td>{service.name}</td>
               <td>{service.description}</td>
               <td>
-                <button
-                  className="action-button edit"
-                  onClick={() => handleAction(service.id, 'edit')}
-                >
+                <button className="action-button edit">
                   Edit
                 </button>
-                <button
-                  className="action-button delete"
-                  onClick={() => handleAction(service.id, 'delete')}
-                >
+                <button className="action-button delete">
                   Delete
                 </button>
               </td>
@@ -80,6 +74,7 @@ function CrmServices() {
         </tbody>
       </table>
 
+      {/* Modal for adding service */}
       {showAddServiceModal && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -94,8 +89,23 @@ function CrmServices() {
                 <textarea required />
               </div>
               <button type="submit" className="action-button">Add</button>
-              <button type="button" onClick={() => setShowAddServiceModal(false)} className="action-button">Cancel</button>
+              <button type="button" onClick={() => setShowAddServiceModal(false)} className="action-button">
+                Cancel
+              </button>
             </form>
+          </div>
+        </div>
+      )}
+
+      {/* Modal for viewing service details */}
+      {selectedService && (
+        <div className="modal-overlay" onClick={() => setSelectedService(null)}>
+          <div className="modal-content" onClick={e => e.stopPropagation()}>
+            <h2>Service Details</h2>
+            <p><strong>ID:</strong> {selectedService.id}</p>
+            <p><strong>Name:</strong> {selectedService.name}</p>
+            <p><strong>Description:</strong> {selectedService.description}</p>
+            <button onClick={() => setSelectedService(null)} className="action-button">Close</button>
           </div>
         </div>
       )}

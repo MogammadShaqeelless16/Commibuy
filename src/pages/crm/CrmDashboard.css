@@ -1,56 +1,125 @@
+/* General styling */
+body {
+  font-family: 'Poppins', sans-serif;
+  background-color: #f4f6f9;
+  color: #333;
+}
+
 .crm-dashboard {
-    padding: 20px;
-    font-family: Arial, sans-serif;
-  }
-  
+  padding: 40px;
+}
+
+.crm-dashboard h1 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #333;
+}
+
+/* Card container for each overview box */
+.dashboard-overview {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.dashboard-card {
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  width: 30%;
+  text-align: center;
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  position: relative;
+}
+
+.dashboard-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+  background-color: #007bff;
+  color: white;
+}
+
+.dashboard-card h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.dashboard-card p {
+  font-size: 32px;
+  font-weight: bold;
+  margin: 0;
+  color: #007bff;
+}
+
+.dashboard-card:hover p {
+  color: white;
+}
+
+.dashboard-card::after {
+  content: 'Go';
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.8);
+  display: none;
+}
+
+.dashboard-card:hover::after {
+  display: block;
+}
+
+/* Map and graph section */
+.dashboard-map-graph {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+}
+
+.map-container,
+.graph-container {
+  flex: 1;
+  background-color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  height: 400px;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.map-container:hover,
+.graph-container:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.map-container h2,
+.graph-container h2 {
+  font-size: 18px;
+  color: #007bff;
+  margin-bottom: 20px;
+}
+
+.leaflet-container {
+  border-radius: 12px;
+  height: 100%;
+}
+
+/* Responsive styling */
+@media (max-width: 1024px) {
   .dashboard-overview {
-    display: flex;
-    justify-content: space-between;
     flex-wrap: wrap;
-    margin-bottom: 20px;
   }
-  
+
   .dashboard-card {
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    width: 30%;
+    width: 100%;
     margin-bottom: 20px;
-    text-align: center;
   }
-  
-  .dashboard-card h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
-  .dashboard-card p {
-    font-size: 24px;
-    font-weight: bold;
-    color: #007bff;
-    margin: 0;
-  }
-  
+
   .dashboard-map-graph {
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
+    flex-direction: column;
   }
-  
-  .map-container,
-  .graph-container {
-    flex: 1;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    height: 400px;
-  }
-  
-  .map-container h2,
-  .graph-container h2 {
-    font-size: 18px;
-    margin-bottom: 10px;
-  }
-  
+}

@@ -1,9 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom'; // useNavigate replaces useHistory in React Router v6+
 import CountUp from 'react-countup';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { LineChart, Line, XAxis, YAxis, Tooltip, CartesianGrid, Legend, ResponsiveContainer } from 'recharts';
-import 'leaflet/dist/leaflet.css'; // Import Leaflet CSS
-import './CrmDashboard.css'; // Ensure this CSS file is updated
+import 'leaflet/dist/leaflet.css';
+import './CrmDashboard.css';
 
 // Sample data for the sales graph
 const salesData = [
@@ -14,23 +15,44 @@ const salesData = [
 ];
 
 function CrmDashboard() {
+  const navigate = useNavigate(); // useNavigate for navigation
+
+  const navigateTo = (path) => {
+    navigate(path); // Updated navigation function using useNavigate
+  };
+
   return (
     <div className="crm-dashboard">
       <h1>CRM Dashboard</h1>
+
       <div className="dashboard-overview">
-        <div className="dashboard-card">
+        {/* Total Customers */}
+        <div
+          className="dashboard-card"
+          onClick={() => navigateTo('/crm/customers')} // Navigate to customers page
+        >
           <h2>Total Customers</h2>
           <p>
             <CountUp start={0} end={150} duration={2.5} separator="," />
           </p>
         </div>
-        <div className="dashboard-card">
+
+        {/* Total Orders */}
+        <div
+          className="dashboard-card"
+          onClick={() => navigateTo('/crm/orders')} // Navigate to orders page
+        >
           <h2>Total Orders</h2>
           <p>
             <CountUp start={0} end={500} duration={2.5} separator="," />
           </p>
         </div>
-        <div className="dashboard-card">
+
+        {/* Total Products */}
+        <div
+          className="dashboard-card"
+          onClick={() => navigateTo('/crm/products')} // Navigate to products page
+        >
           <h2>Total Products</h2>
           <p>
             <CountUp start={0} end={200} duration={2.5} separator="," />
@@ -38,25 +60,26 @@ function CrmDashboard() {
         </div>
       </div>
 
+      {/* Map and Graph Section */}
       <div className="dashboard-map-graph">
+        {/* Map Container */}
         <div className="map-container">
           <h2>Map Overview</h2>
-          <MapContainer center={[-30.5595, 22.9375]} zoom={6} style={{ height: '100%', width: '100%' }}>
+          <MapContainer center={[-30.5595, 22.9375]} zoom={6} className="leaflet-container">
             <TileLayer
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
             />
             <Marker position={[-30.5595, 22.9375]}>
-              <Popup>
-                South Africa Overview
-              </Popup>
+              <Popup>South Africa Overview</Popup>
             </Marker>
           </MapContainer>
         </div>
 
+        {/* Sales and Profits Graph */}
         <div className="graph-container">
           <h2>Sales and Profits</h2>
-          <ResponsiveContainer width="100%" height={400}>
+          <ResponsiveContainer width="100%" height="100%">
             <LineChart data={salesData}>
               <CartesianGrid strokeDasharray="3 3" />
               <XAxis dataKey="name" />
