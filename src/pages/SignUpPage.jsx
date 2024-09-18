@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
-import './SignUpPage.css'; // Ensure the CSS file exists
-import { supabase } from '../supabase/supabaseClient'; // Import Supabase client
+import './SignUpPage.css';
+import { supabase } from '../supabase/supabaseClient';
 
 function SignUpPage() {
-  // State hooks for form inputs
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [username, setUsername] = useState('');
@@ -19,7 +18,7 @@ function SignUpPage() {
     setSuccess('');
 
     try {
-      // Create user in Supabase Auth
+      // Sign up the user in Supabase Auth
       const { data: signUpData, error: signUpError } = await supabase.auth.signUp({
         email,
         password,
@@ -27,8 +26,21 @@ function SignUpPage() {
 
       if (signUpError) throw signUpError;
 
-      const userId = signUpData.user.id;
+      // Notify user to check email for verification
+      setSuccess('Sign-up successful! Please check your email to verify your account.');
 
+      // Handle additional steps after email verification
+      // This usually involves sending a separate API request to check if the email is verified
+      // For simplicity, let's assume we have an email verification step later
+
+    } catch (error) {
+      setError(error.message || 'Error signing up');
+    }
+  };
+
+  // This would be part of a verification process you set up separately
+  const handleEmailVerification = async (userId) => {
+    try {
       // Insert additional user details into the custom users table
       const { error: insertError } = await supabase
         .from('users')
@@ -45,9 +57,9 @@ function SignUpPage() {
 
       if (insertError) throw insertError;
 
-      setSuccess('Sign-up successful! You can now log in.');
+      setSuccess('User details added successfully.');
     } catch (error) {
-      setError(error.message || 'Error signing up');
+      setError(error.message || 'Error adding user details');
     }
   };
 

@@ -1,10 +1,8 @@
-// src/components/Menu.jsx
-
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { FaHome, FaInfoCircle, FaSignInAlt, FaUserPlus, FaShoppingCart, FaBars, FaTimes } from 'react-icons/fa';
+import { FaHome, FaInfoCircle, FaSignInAlt, FaUserPlus, FaGlobe, FaBars, FaTimes } from 'react-icons/fa';
 import Logo from './Logo'; // Import the Logo component
-import './Menu.css'; // Make sure to create this CSS file
+import './Menu.css'; // Ensure this CSS file is updated
 
 function Menu() {
   const [isOpen, setIsOpen] = useState(false);
@@ -25,7 +23,7 @@ function Menu() {
         <ul className={`menu-items ${isOpen ? 'open' : ''}`}>
           <li><Link to="/"><FaHome /> Home</Link></li>
           <li><Link to="/about"><FaInfoCircle /> About</Link></li>
-          <li><Link to="/shops"><FaShoppingCart /> Shops</Link></li>
+          <li><Link to="/business"><FaGlobe /> Businesses</Link></li> {/* Updated to "Businesses" */}
           <li><Link to="/login"><FaSignInAlt /> Login</Link></li>
         </ul>
       </div>

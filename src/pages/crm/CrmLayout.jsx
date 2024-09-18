@@ -1,15 +1,20 @@
-import React from 'react';
-import { Link, useNavigate, Outlet } from 'react-router-dom'; // Import Outlet
-import { FaTachometerAlt, FaUsers, FaBoxOpen, FaClipboardList, FaSignOutAlt, FaUserTie } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { Link, useNavigate, Outlet } from 'react-router-dom';
+import { FaTachometerAlt, FaUsers, FaBoxOpen, FaClipboardList, FaSignOutAlt, FaUserTie, FaUser, FaBusinessTime } from 'react-icons/fa';
 import './CrmLayout.css';
 
 function CrmLayout() {
   const navigate = useNavigate();
+  const [showAdminMenu, setShowAdminMenu] = useState(false);
 
   const handleLogout = () => {
     // Clear session (if any)
     // Redirect to the home page
     navigate('/');
+  };
+
+  const toggleAdminMenu = () => {
+    setShowAdminMenu(prevState => !prevState);
   };
 
   return (
@@ -40,6 +45,27 @@ function CrmLayout() {
             <Link to="/crm/leads">
               <FaUserTie /> Leads
             </Link>
+          </li>
+          <li>
+            <Link to="/crm/my-business">
+              <FaBusinessTime /> My Business
+            </Link>
+          </li>
+          <li>
+            <Link to="/crm/my-profile">
+              <FaUser /> My Profile
+            </Link>
+          </li>
+          <li>
+            <button onClick={toggleAdminMenu} className="dropdown-toggle">
+              Admin
+            </button>
+            {showAdminMenu && (
+              <ul className="admin-menu">
+                <li><Link to="/crm/admin/user-management">User Management</Link></li>
+                <li><Link to="/crm/admin/business-management">Business Management</Link></li>
+              </ul>
+            )}
           </li>
           <li>
             <button onClick={handleLogout} className="logout-button">
