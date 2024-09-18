@@ -1,0 +1,139 @@
+/* Overall page styling */
+.business-management-page {
+    padding: 40px;
+    background-color: #f4f7fc;
+    font-family: 'Inter', sans-serif;
+  }
+  
+  h1 {
+    font-size: 28px;
+    color: #1e2a38;
+    margin-bottom: 30px;
+    font-weight: 600;
+  }
+  
+  /* Search bar styling */
+  .search-container {
+    margin-bottom: 30px;
+    text-align: right;
+  }
+  
+  .search-input {
+    padding: 10px 15px;
+    width: 100%;
+    max-width: 300px;
+    font-size: 16px;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    background-color: #ffffff;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  /* Grid layout for business cards */
+  .business-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px; /* Increased gap between business cards */
+  }
+  
+  /* Modern card design */
+  .business-card {
+    background-color: #ffffff;
+    padding: 25px; /* Increased padding inside cards */
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+    border: 1px solid #e2e8f0;
+  }
+  
+  .business-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+    border-color: #4a90e2;
+  }
+  
+  .business-card h2 {
+    font-size: 22px;
+    margin-bottom: 10px;
+    color: #374151;
+  }
+  
+  .business-card p {
+    font-size: 16px;
+    color: #6b7280;
+    margin-bottom: 8px;
+  }
+  
+  /* Modal styling */
+  .modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 100%;
+  }
+  
+  .modal-content label {
+    display: block;
+    margin-bottom: 10px;
+    font-weight: 500;
+  }
+  
+  .modal-content input[type="text"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+  
+  .modal-content input[type="checkbox"] {
+    margin-left: 10px;
+  }
+  
+  .modal-actions {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+  }
+  
+  .save-button,
+  .cancel-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .save-button {
+    background-color: #4a90e2;
+    color: white;
+  }
+  
+  .cancel-button {
+    background-color: #e5e7eb;
+    color: #1e2a38;
+  }
+  
+  /* Responsive design adjustments */
+  @media (max-width: 768px) {
+    .business-list {
+      grid-template-columns: 1fr;
+    }
+  }
+  

@@ -1,0 +1,132 @@
+/* User Management Page */
+.user-management-page {
+    padding: 40px;
+    background-color: #f4f7fc;
+  }
+  
+  h1 {
+    font-size: 28px;
+    color: #1e2a38;
+    margin-bottom: 30px;
+    font-weight: 600;
+  }
+  
+  .header {
+    margin-bottom: 20px;
+  }
+  
+  .add-user-button {
+    padding: 10px 20px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .user-table th,
+  .user-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #e2e8f0;
+  }
+  
+  .user-table th {
+    background-color: #4a90e2;
+    color: white;
+    font-weight: bold;
+  }
+  
+  .user-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  .user-table tr:hover {
+    background-color: #e2e8f0;
+  }
+  
+  .user-table td {
+    color: #4a4a4a;
+  }
+  
+  .user-table .action-button {
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .user-table .action-button.edit {
+    background-color: #4a90e2;
+    color: white;
+  }
+  
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  
+  .modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 80%;
+    max-width: 600px;
+  }
+  
+  .modal-content h2 {
+    margin-bottom: 20px;
+  }
+  
+  .form-group {
+    margin-bottom: 15px;
+  }
+  
+  .form-group label {
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .form-group input,
+  .form-group select {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+  }
+  
+  .modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+  }
+  
+  .modal-actions .cancel-button,
+  .modal-actions .submit-button {
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .modal-actions .cancel-button {
+    background-color: #ddd;
+  }
+  
+  .modal-actions .submit-button {
+    background-color: #4a90e2;
+    color: white;
+  }
+  
