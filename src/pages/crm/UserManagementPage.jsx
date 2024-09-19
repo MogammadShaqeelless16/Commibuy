@@ -10,6 +10,7 @@ function UserManagementPage() {
   const [selectedUser, setSelectedUser] = useState(null);
   const [showModal, setShowModal] = useState(false);
   const [newUser, setNewUser] = useState({ username: '', email: '', role_id: '', businessIds: [] });
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     async function loadData() {
@@ -17,7 +18,7 @@ function UserManagementPage() {
         const usersData = await fetchUsersWithRoles();
         if (usersData) {
           setUsers(usersData);
-  
+
           // Prepare user-business mapping (with business names)
           const mapping = {};
           usersData.forEach(user => {
@@ -29,7 +30,7 @@ function UserManagementPage() {
           });
           setUserBusinessMapping(mapping);
         }
-  
+
         // Fetch businesses
         const businessesData = await fetchBusinesses();
         if (businessesData) {
@@ -39,7 +40,7 @@ function UserManagementPage() {
         console.error('Error fetching data:', error.message);
       }
     }
-  
+
     loadData();
   }, []);
 
@@ -90,10 +91,26 @@ function UserManagementPage() {
     }
   };
 
+  const handleSearch = (e) => {
+    setSearchQuery(e.target.value);
+  };
+
+  const filteredUsers = users.filter(user =>
+    user.username.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    user.email.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div className="user-management-page">
       <h1>User Management</h1>
       <div className="header">
+        <input
+          type="text"
+          placeholder="Search users..."
+          value={searchQuery}
+          onChange={handleSearch}
+          className="search-input"
+        />
         <button onClick={() => setShowModal(true)} className="add-user-button">
           Add User
         </button>
@@ -110,10 +127,10 @@ function UserManagementPage() {
           </tr>
         </thead>
         <tbody>
-          {users.length ? (
-            users.map(user => {
+          {filteredUsers.length ? (
+            filteredUsers.map(user => {
               const businessNames = getBusinessNames(userBusinessMapping[user.id] || []);
-              const lastLoginDate = new Date(user.last_login);
+              const lastLoginDate = user.last_login ? new Date(user.last_login) : new Date();
               const isLongTime = new Date() - lastLoginDate > 30 * 24 * 60 * 60 * 1000; // Check if last login was more than a month ago
               return (
                 <tr key={user.id} onClick={() => handleUserClick(user)}>
