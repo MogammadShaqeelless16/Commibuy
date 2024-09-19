@@ -2,21 +2,22 @@ import { supabase } from './supabaseClient'; // Adjust the path as needed
 
 // Fetch all users with their roles
 export const fetchUsersWithRoles = async () => {
-  try {
-    const { data, error } = await supabase
-      .from('users')
-      .select('*, roles(role_name), users_businesses(businesses(name))');
-
-    if (error) throw error;
-    
-    console.log('Users with roles and businesses fetched:', data);
-    return data;
-  } catch (error) {
-    console.error('Error fetching users with roles and businesses:', error);
-    return null;
-  }
-};
-
+    try {
+      const { data, error } = await supabase
+        .from('users') // Your user table
+        .select('id, username, email, role_id, users_businesses ( business_id, businesses ( name ) ), roles ( role_name )') // Join tables
+        .order('created_at', { ascending: true });
+  
+      if (error) {
+        throw error;
+      }
+  
+      return data;
+    } catch (error) {
+      console.error('Error fetching users with roles:', error.message);
+      return [];
+    }
+  };
 // Add a new user
 export const addUser = async (user) => {
   const { username, email, role_id, businessIds } = user;
@@ -136,4 +137,28 @@ export const fetchCurrentUser = async () => {
     }
   
     return true;
+  };
+
+  export const fetchCurrentUserRole = async () => {
+    const { data: session, error: sessionError } = await supabase.auth.getSession();
+  
+    if (sessionError || !session?.session) {
+      console.error('Error fetching user session:', sessionError);
+      return null;
+    }
+  
+    const userId = session.session.user.id;
+  
+    const { data: user, error } = await supabase
+      .from('users')
+      .select('role_id, roles ( role_name )') // Assuming role_id and roles table
+      .eq('id', userId)
+      .single();
+  
+    if (error) {
+      console.error('Error fetching user role:', error);
+      return null;
+    }
+  
+    return user?.roles?.role_name; // Adjust based on your schema
   };

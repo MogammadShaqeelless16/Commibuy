@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { fetchUsersWithRoles, addUser, updateUser } from '../../supabase/userOperations'; // Adjust the path as needed
-import { fetchBusinesses } from '../../supabase/businessOperations'; // Adjust the path as needed
+import { fetchUsersWithRoles, addUser, updateUser } from '../../supabase/userOperations'; // Adjust path as needed
+import { fetchBusinesses } from '../../supabase/businessOperations'; // Adjust path as needed
 import './UserManagementPage.css';
 
 function UserManagementPage() {
@@ -14,7 +14,6 @@ function UserManagementPage() {
   useEffect(() => {
     async function loadData() {
       try {
-        // Fetch users with roles and businesses
         const usersData = await fetchUsersWithRoles();
         if (usersData) {
           setUsers(usersData);
@@ -22,8 +21,8 @@ function UserManagementPage() {
           // Prepare user-business mapping (with business names)
           const mapping = {};
           usersData.forEach(user => {
-            if (user.users_businesses && user.users_businesses.length > 0) {
-              mapping[user.id] = user.users_businesses.map(ub => ub.businesses.name); // Access the business name directly
+            if (user.users_businesses) {
+              mapping[user.id] = user.users_businesses.map(ub => ub.businesses?.name || 'Unknown Business'); // Handle null names
             } else {
               mapping[user.id] = [];
             }
@@ -37,7 +36,7 @@ function UserManagementPage() {
           setBusinesses(businessesData);
         }
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error('Error fetching data:', error.message);
       }
     }
   
@@ -56,7 +55,7 @@ function UserManagementPage() {
         setUsers(updatedUsers);
       }
     } catch (error) {
-      console.error('Error adding user:', error);
+      console.error('Error adding user:', error.message);
     }
   };
 
@@ -72,12 +71,12 @@ function UserManagementPage() {
         setUsers(updatedUsers);
       }
     } catch (error) {
-      console.error('Error updating user:', error);
+      console.error('Error updating user:', error.message);
     }
   };
 
   const getBusinessNames = (businessNames) => {
-    if (!businessNames || !Array.isArray(businessNames)) return 'No Business';
+    if (!Array.isArray(businessNames)) return 'No Business';
     return businessNames.join(', '); // Join business names by a comma
   };
 
@@ -85,7 +84,7 @@ function UserManagementPage() {
     if (user) {
       setSelectedUser({
         ...user,
-        businessIds: userBusinessMapping[user.id] || []
+        businessIds: user.users_businesses ? user.users_businesses.map(ub => ub.business_id) : []
       });
       setShowModal(true);
     }
@@ -104,40 +103,47 @@ function UserManagementPage() {
           <tr>
             <th>Username</th>
             <th>Email</th>
+            <th>Role</th>
             <th>Businesses</th>
+            <th>Last Login</th>
             <th>Actions</th>
           </tr>
         </thead>
-          <tbody>
-            {users.length ? (
-              users.map((user) => {
-                const businessNames = getBusinessNames(userBusinessMapping[user.id]); // Directly pass the business names
-                return (
-                  <tr key={user.id} onClick={() => handleUserClick(user)}>
-                    <td>{user.username}</td>
-                    <td>{user.email}</td>
-                    <td>{businessNames || 'No Business'}</td>
-                    <td>
-                      <button
-                        className="action-button edit"
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          handleUserClick(user);
-                        }}
-                      >
-                        Edit
-                      </button>
-                    </td>
-                  </tr>
-                );
-              })
-            ) : (
-              <tr>
-                <td colSpan="4">No users found.</td>
-              </tr>
-            )}
-          </tbody>
-
+        <tbody>
+          {users.length ? (
+            users.map(user => {
+              const businessNames = getBusinessNames(userBusinessMapping[user.id] || []);
+              const lastLoginDate = new Date(user.last_login);
+              const isLongTime = new Date() - lastLoginDate > 30 * 24 * 60 * 60 * 1000; // Check if last login was more than a month ago
+              return (
+                <tr key={user.id} onClick={() => handleUserClick(user)}>
+                  <td>{user.username}</td>
+                  <td>{user.email}</td>
+                  <td>{user.roles ? user.roles.role_name : 'No Role'}</td>
+                  <td>{businessNames}</td>
+                  <td className={isLongTime ? 'long-time' : ''}>
+                    {lastLoginDate.toLocaleString()}
+                  </td>
+                  <td>
+                    <button
+                      className="action-button edit"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        handleUserClick(user);
+                      }}
+                    >
+                      Edit
+                    </button>
+                  </td>
+                </tr>
+              );
+            })
+          ) : (
+            <tr>
+              <td colSpan="6">No users found.</td>
+            </tr>
+          )}
+        </tbody>
       </table>
 
       {/* Modal for Editing User */}
@@ -189,6 +195,13 @@ function UserManagementPage() {
                   }}
                 >
                   {/* Populate this with role options */}
+                  {/* Example:
+                    roles.map(role => (
+                      <option key={role.id} value={role.id}>
+                        {role.role_name}
+                      </option>
+                    ))
+                  */}
                 </select>
               </div>
               <div className="form-group">
@@ -198,17 +211,13 @@ function UserManagementPage() {
                   multiple
                   value={selectedUser ? selectedUser.businessIds : newUser.businessIds}
                   onChange={(e) => {
-                    const options = e.target.options;
-                    const selectedValues = [];
-                    for (let i = 0; i < options.length; i++) {
-                      if (options[i].selected) selectedValues.push(options[i].value);
-                    }
+                    const selectedOptions = Array.from(e.target.selectedOptions, option => option.value);
                     selectedUser
-                      ? setSelectedUser({ ...selectedUser, businessIds: selectedValues })
-                      : setNewUser({ ...newUser, businessIds: selectedValues });
+                      ? setSelectedUser({ ...selectedUser, businessIds: selectedOptions })
+                      : setNewUser({ ...newUser, businessIds: selectedOptions });
                   }}
                 >
-                  {businesses.map((business) => (
+                  {businesses.map(business => (
                     <option key={business.id} value={business.id}>
                       {business.name}
                     </option>

@@ -7,7 +7,9 @@ function MyProfilePage() {
   const [isEditing, setIsEditing] = useState(false);
   const [formData, setFormData] = useState({
     name: '',
-    email: ''
+    email: '',
+    bio: '',
+    address: ''
   });
 
   useEffect(() => {
@@ -17,7 +19,9 @@ function MyProfilePage() {
         setProfile(userProfile);
         setFormData({
           name: userProfile.name,
-          email: userProfile.email
+          email: userProfile.email,
+          bio: userProfile.bio || '',
+          address: userProfile.address || ''
         });
       }
     }
@@ -36,7 +40,7 @@ function MyProfilePage() {
     if (profile && profile.id) {
       const success = await updateUserProfile(profile.id, formData); // Use the helper function
       if (success) {
-        setProfile(formData); // Update the profile state with the new data
+        setProfile({ ...profile, ...formData }); // Update the profile state with the new data
         setIsEditing(false); // Exit editing mode
       } else {
         console.error('Error updating profile');
@@ -46,27 +50,68 @@ function MyProfilePage() {
 
   return (
     <div className="my-profile-page">
-      <h1>My Profile</h1>
-      {isEditing ? (
-        <div>
-          <label>
-            Name:
-            <input type="text" name="name" value={formData.name} onChange={handleChange} />
-          </label>
-          <label>
-            Email:
-            <input type="email" name="email" value={formData.email} onChange={handleChange} />
-          </label>
-          <button onClick={handleSave}>Save</button>
-          <button onClick={() => setIsEditing(false)}>Cancel</button>
+      <div className={`profile-container ${isEditing ? 'editing' : ''}`}>
+        <div className="profile-picture">
+          <img 
+            src={profile?.profilePicture || 'https://t3.ftcdn.net/jpg/06/33/54/78/360_F_633547842_AugYzexTpMJ9z1YcpTKUBoqBF0CUCk10.jpg'} 
+            alt="Profile" 
+          />
         </div>
-      ) : (
-        <div>
-          <p>Name: {profile?.name}</p>
-          <p>Email: {profile?.email}</p>
-          <button onClick={() => setIsEditing(true)}>Edit</button>
+        <div className="profile-info">
+          {isEditing ? (
+            <div className="profile-edit-form">
+              <label>
+                Name:
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                />
+              </label>
+              <label>
+                Email:
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                />
+              </label>
+              <label>
+                Bio:
+                <textarea
+                  name="bio"
+                  value={formData.bio}
+                  onChange={handleChange}
+                />
+              </label>
+              <label>
+                Address:
+                <input
+                  type="text"
+                  name="address"
+                  value={formData.address}
+                  onChange={handleChange}
+                />
+              </label>
+              <div className="button-group">
+                <button className="save-button" onClick={handleSave}>Save</button>
+                <button className="cancel-button" onClick={() => setIsEditing(false)}>Cancel</button>
+              </div>
+            </div>
+          ) : (
+            <div className="profile-details">
+              <h2>{profile?.name}</h2>
+              <p><strong>Email:</strong> {profile?.email}</p>
+              <p><strong>Bio:</strong> {profile?.bio || 'No bio available'}</p>
+              <p><strong>Address:</strong> {profile?.address || 'No address available'}</p>
+              <p><strong>Role:</strong> {profile?.role}</p>
+              <button className="edit-button" onClick={() => setIsEditing(true)}>Edit Profile</button>
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 }

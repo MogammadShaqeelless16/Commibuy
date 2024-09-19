@@ -1,14 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link, useNavigate, Outlet } from 'react-router-dom';
 import { 
   FaTachometerAlt, FaUsers, FaBoxOpen, FaClipboardList, 
   FaSignOutAlt, FaUserTie, FaUser, FaBusinessTime, FaServicestack 
 } from 'react-icons/fa';
 import './CrmLayout.css';
+import { fetchCurrentUserRole } from '../../supabase/userOperations'; // Adjust the path
 
 function CrmLayout() {
   const navigate = useNavigate();
   const [showAdminMenu, setShowAdminMenu] = useState(false);
+  const [userRole, setUserRole] = useState(null);
+
+  useEffect(() => {
+    async function loadUserRole() {
+      try {
+        const role = await fetchCurrentUserRole();
+        setUserRole(role);
+      } catch (error) {
+        console.error('Error fetching user role:', error);
+      }
+    }
+
+    loadUserRole();
+  }, []);
 
   const handleLogout = () => {
     // Clear session (if any)
@@ -64,17 +79,19 @@ function CrmLayout() {
               <FaUser /> My Profile
             </Link>
           </li>
-          <li>
-            <button onClick={toggleAdminMenu} className="dropdown-toggle">
-              Admin
-            </button>
-            {showAdminMenu && (
-              <ul className="admin-menu">
-                <li><Link to="/crm/admin/user-management">User Management</Link></li>
-                <li><Link to="/crm/admin/business-management">Business Management</Link></li>
-              </ul>
-            )}
-          </li>
+          {(userRole === 'Admin' || userRole === 'Developer') && (
+            <li>
+              <button onClick={toggleAdminMenu} className="dropdown-toggle">
+                Admin
+              </button>
+              {showAdminMenu && (
+                <ul className="admin-menu">
+                  <li><Link to="/crm/admin/user-management">User Management</Link></li>
+                  <li><Link to="/crm/admin/business-management">Business Management</Link></li>
+                </ul>
+              )}
+            </li>
+          )}
           <li>
             <button onClick={handleLogout} className="logout-button">
               <FaSignOutAlt /> Logout
