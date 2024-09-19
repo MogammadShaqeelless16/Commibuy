@@ -53,3 +53,21 @@ export const updateBusiness = async (business) => {
     return null;
   }
 };
+
+// Fetch only active businesses
+export const fetchActiveBusinesses = async () => {
+  try {
+    const { data, error } = await supabase
+      .from('businesses')
+      .select('*')
+      .eq('active', true); // Filtering businesses where the 'active' column is true
+
+    if (error) throw error;
+
+    console.log('Active businesses fetched:', data);
+    return data;
+  } catch (error) {
+    console.error('Error fetching active businesses:', error);
+    return [];
+  }
+};

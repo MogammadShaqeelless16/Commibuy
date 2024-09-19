@@ -1,52 +1,76 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { supabase } from '../supabase/supabaseClient';
+import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
+import 'leaflet/dist/leaflet.css';
 import './BusinessDetailsPage.css'; // Ensure this CSS file is updated accordingly
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaPhoneAlt, FaMapMarkerAlt, FaEnvelope } from 'react-icons/fa';
+import L from 'leaflet';
+
+// Import Leaflet's default icons for use in the browser
+import markerIcon from 'leaflet/dist/images/marker-icon.png';
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
+
+// Ensure Leaflet's default icon is used correctly
+delete L.Icon.Default.prototype._getIconUrl;
+
+L.Icon.Default.mergeOptions({
+  iconUrl: markerIcon,
+  iconRetinaUrl: markerIcon2x,
+  shadowUrl: markerShadow,
+});
 
 function BusinessDetailsPage() {
   const { businessSlug } = useParams(); // Get businessSlug from URL parameters
   const [business, setBusiness] = useState(null);
   const [products, setProducts] = useState([]);
   const [services, setServices] = useState([]);
+  const [mapCenter, setMapCenter] = useState([0, 0]); // Default center for the map
+  const [mapZoom, setMapZoom] = useState(16); // More zoomed-in level
 
   useEffect(() => {
     async function fetchBusinessDetails() {
-      // Fetch business details by slug
-      const { data: businessData, error: businessError } = await supabase
-        .from('businesses')
-        .select('*')
-        .eq('slug', businessSlug)
-        .single();
+      try {
+        // Fetch business details by slug
+        const { data: businessData, error: businessError } = await supabase
+          .from('businesses')
+          .select('*')
+          .eq('slug', businessSlug)
+          .eq('registered', true) // Check if the business is registered
+          .single();
 
-      if (businessError) {
-        console.error('Error fetching business details:', businessError);
-      } else {
+        if (businessError) throw businessError;
+
         setBusiness(businessData);
-      }
 
-      // Fetch business products
-      const { data: productsData, error: productsError } = await supabase
-        .from('products')
-        .select('*')
-        .eq('shop_id', businessData.id);
+        // Set the map center based on the business location
+        if (businessData.latitude && businessData.longitude) {
+          setMapCenter([businessData.latitude, businessData.longitude]);
+        }
 
-      if (productsError) {
-        console.error('Error fetching products:', productsError);
-      } else {
+        // Fetch business products
+        const { data: productsData, error: productsError } = await supabase
+          .from('products')
+          .select('*')
+          .eq('shop_id', businessData.id);
+
+        if (productsError) throw productsError;
+
         setProducts(productsData);
-      }
 
-      // Fetch business services
-      const { data: servicesData, error: servicesError } = await supabase
-        .from('services')
-        .select('*')
-        .eq('shop_id', businessData.id);
+        // Fetch business services
+        const { data: servicesData, error: servicesError } = await supabase
+          .from('services')
+          .select('*')
+          .eq('shop_id', businessData.id);
 
-      if (servicesError) {
-        console.error('Error fetching services:', servicesError);
-      } else {
+        if (servicesError) throw servicesError;
+
         setServices(servicesData);
+
+      } catch (error) {
+        console.error('Error fetching business details:', error);
       }
     }
 
@@ -63,46 +87,53 @@ function BusinessDetailsPage() {
             <img src={business.header_image} alt="Business Header" />
           </div>
         )}
-        <div className="logo-container">
-          {business.logo && <img src={business.logo} alt="Business Logo" className="business-logo" />}
-        </div>
-        <div className="business-info">
-          <h1>{business.name}</h1>
-          <div className="info-item">
-            <FaMapMarkerAlt />
-            <p>{business.address}</p>
-          </div>
-          <div className="info-item">
-            <FaPhoneAlt />
-            <p>{business.contact_number}</p>
-          </div>
-          <div className="info-item">
-            <span>Registered: {business.registered ? 'Yes' : 'No'}</span>
-          </div>
-          <div className="social-media">
-            {business.social_media_facebook && (
-              <a href={business.social_media_facebook} target="_blank" rel="noopener noreferrer">
-                <FaFacebook />
-              </a>
-            )}
-            {business.social_media_twitter && (
-              <a href={business.social_media_twitter} target="_blank" rel="noopener noreferrer">
-                <FaTwitter />
-              </a>
-            )}
-            {business.social_media_instagram && (
-              <a href={business.social_media_instagram} target="_blank" rel="noopener noreferrer">
-                <FaInstagram />
-              </a>
-            )}
-            {business.social_media_linkedin && (
-              <a href={business.social_media_linkedin} target="_blank" rel="noopener noreferrer">
-                <FaLinkedin />
-              </a>
-            )}
-          </div>
-        </div>
       </header>
+      <div className="business-info">
+        <h1>{business.name}</h1>
+        {business.description && (
+          <>
+            <h2 className="who-are-we">Who are we?</h2>
+            <p className="description">{business.description}</p>
+          </>
+        )}
+        <div className="info-item">
+          <FaMapMarkerAlt className="info-icon" />
+          <p>{business.address}</p>
+        </div>
+        <div className="info-item">
+          <FaPhoneAlt className="info-icon" />
+          <a href={`tel:${business.contact_number}`}>{business.contact_number}</a>
+        </div>
+        <div className="info-item">
+          <FaEnvelope className="info-icon" />
+          <a href={`mailto:${business.email}`}>{business.email}</a>
+        </div>
+        <div className="info-item">
+          <span>Registered: {business.registered ? 'Yes' : 'No'}</span>
+        </div>
+        <div className="social-media">
+          {business.social_media_facebook && (
+            <a href={business.social_media_facebook} target="_blank" rel="noopener noreferrer">
+              <FaFacebook />
+            </a>
+          )}
+          {business.social_media_twitter && (
+            <a href={business.social_media_twitter} target="_blank" rel="noopener noreferrer">
+              <FaTwitter />
+            </a>
+          )}
+          {business.social_media_instagram && (
+            <a href={business.social_media_instagram} target="_blank" rel="noopener noreferrer">
+              <FaInstagram />
+            </a>
+          )}
+          {business.social_media_linkedin && (
+            <a href={business.social_media_linkedin} target="_blank" rel="noopener noreferrer">
+              <FaLinkedin />
+            </a>
+          )}
+        </div>
+      </div>
       {services.length > 0 && (
         <section className="services-section">
           <h2>Services</h2>
@@ -139,6 +170,23 @@ function BusinessDetailsPage() {
               </div>
             ))}
           </div>
+        </section>
+      )}
+      {business.latitude && business.longitude && (
+        <section className="map-section">
+          <h2>Location</h2>
+          <MapContainer center={mapCenter} zoom={mapZoom} style={{ height: '400px', width: '100%' }}>
+            <TileLayer
+              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            />
+            <Marker position={mapCenter}>
+              <Popup>
+                <strong>{business.name}</strong><br />
+                {business.description}
+              </Popup>
+            </Marker>
+          </MapContainer>
         </section>
       )}
     </div>

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { supabase } from '../supabase/supabaseClient';
+import { fetchActiveBusinesses } from '../supabase/businessOperations'; // Adjust the path as needed
 import './BusinessPage.css'; // Ensure this CSS file is updated
 
 function BusinessPage() {
@@ -8,16 +8,12 @@ function BusinessPage() {
   const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
-    async function fetchBusinesses() {
-      const { data: businessesData, error } = await supabase.from('businesses').select('*');
-      if (error) {
-        console.error('Error fetching businesses:', error);
-      } else {
-        setBusinesses(businessesData);
-      }
+    async function loadBusinesses() {
+      const activeBusinesses = await fetchActiveBusinesses();
+      setBusinesses(activeBusinesses);
     }
 
-    fetchBusinesses();
+    loadBusinesses();
   }, []);
 
   const handleSearchChange = (event) => {
@@ -62,7 +58,7 @@ function BusinessPage() {
             </div>
           ))
         ) : (
-          <p>No businesses found.</p>
+          <p>No active businesses found.</p>
         )}
       </div>
     </div>
