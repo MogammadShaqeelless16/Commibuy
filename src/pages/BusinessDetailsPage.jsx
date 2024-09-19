@@ -36,6 +36,7 @@ function BusinessDetailsPage() {
     interest: ''
   });
   const [formStatus, setFormStatus] = useState(null); // Track form submission status
+  const [showSuccessPopup, setShowSuccessPopup] = useState(false); // Manage success pop-up visibility
 
   useEffect(() => {
     async function fetchBusinessDetails() {
@@ -100,19 +101,30 @@ function BusinessDetailsPage() {
   const handleFormSubmit = async (e) => {
     e.preventDefault();
     try {
+      if (!business || !business.id) {
+        console.error('Business ID is not available');
+        setFormStatus('error');
+        return;
+      }
+
+      console.log('Submitting form with business_id:', business.id);
+
       const { error } = await supabase
         .from('leads')
         .insert([{
-          business_uuid: business.uuid,
+          business_uuid: business.id, // Ensure business_id is correctly included
           name: contactForm.name,
           email: contactForm.email,
           message: contactForm.message,
-          interest: contactForm.interest
+          interest: contactForm.interest,
+          source: 'website' // Add source to the form submission
         }]);
 
       if (error) throw error;
 
       setFormStatus('success');
+      setShowSuccessPopup(true); // Show success pop-up
+
       // Optionally reset form or do other post-submit actions
       setContactForm({
         name: '',
@@ -125,6 +137,10 @@ function BusinessDetailsPage() {
       console.error('Error submitting form:', error);
       setFormStatus('error');
     }
+  };
+
+  const handleClosePopup = () => {
+    setShowSuccessPopup(false);
   };
 
   return (
@@ -209,47 +225,61 @@ function BusinessDetailsPage() {
         </section>
       )}
 
-      {/* Contact Details */}
-      <section className="contact-details-section" id="contact-section">
-        <div className="container">
-          <div className="info-grid">
-            <div className="info-item">
-              <FaMapMarkerAlt className="info-icon" />
-              <p>{business.address}</p>
-            </div>
-            <div className="info-item">
-              <FaPhoneAlt className="info-icon" />
-              <a href={`tel:${business.contact_number}`}>{business.contact_number}</a>
-            </div>
-            <div className="info-item">
-              <FaEnvelope className="info-icon" />
-              <a href={`mailto:${business.email}`}>{business.email}</a>
-            </div>
-          </div>
-          <div className="social-media">
-            {business.social_media_facebook && (
-              <a href={business.social_media_facebook} target="_blank" rel="noopener noreferrer" className="social-link">
-                <FaFacebook />
-              </a>
-            )}
-            {business.social_media_twitter && (
-              <a href={business.social_media_twitter} target="_blank" rel="noopener noreferrer" className="social-link">
-                <FaTwitter />
-              </a>
-            )}
-            {business.social_media_instagram && (
-              <a href={business.social_media_instagram} target="_blank" rel="noopener noreferrer" className="social-link">
-                <FaInstagram />
-              </a>
-            )}
-            {business.social_media_linkedin && (
-              <a href={business.social_media_linkedin} target="_blank" rel="noopener noreferrer" className="social-link">
-                <FaLinkedin />
-              </a>
-            )}
+{/* Contact Details */}
+<section className="contact-details-section" id="contact-section">
+  <div className="container">
+    <div className="contact-details-grid">
+      <div className="contact-info">
+        <div className="info-item">
+          <FaMapMarkerAlt className="info-icon" />
+          <div className="info-text">
+            <p className="info-title">Address</p>
+            <p>{business.address}</p>
           </div>
         </div>
-      </section>
+        <div className="info-item">
+          <FaPhoneAlt className="info-icon" />
+          <div className="info-text">
+            <p className="info-title">Phone</p>
+            <a href={`tel:${business.contact_number}`}>{business.contact_number}</a>
+          </div>
+        </div>
+        <div className="info-item">
+          <FaEnvelope className="info-icon" />
+          <div className="info-text">
+            <p className="info-title">Email</p>
+            <a href={`mailto:${business.email}`}>{business.email}</a>
+          </div>
+        </div>
+      </div>
+      <div className="social-media">
+        <p className="social-title">Follow us</p>
+        <div className="social-links">
+          {business.social_media_facebook && (
+            <a href={business.social_media_facebook} target="_blank" rel="noopener noreferrer" className="social-link">
+              <FaFacebook />
+            </a>
+          )}
+          {business.social_media_twitter && (
+            <a href={business.social_media_twitter} target="_blank" rel="noopener noreferrer" className="social-link">
+              <FaTwitter />
+            </a>
+          )}
+          {business.social_media_instagram && (
+            <a href={business.social_media_instagram} target="_blank" rel="noopener noreferrer" className="social-link">
+              <FaInstagram />
+            </a>
+          )}
+          {business.social_media_linkedin && (
+            <a href={business.social_media_linkedin} target="_blank" rel="noopener noreferrer" className="social-link">
+              <FaLinkedin />
+            </a>
+          )}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
       {/* Contact Us Section */}
       <section className="contact-us-section" id="contact-form-section">
@@ -301,7 +331,15 @@ function BusinessDetailsPage() {
                 <button type="submit" className="submit-button">Send</button>
               </form>
               {/* Display form status message */}
-              {formStatus === 'success' && <div className="success-message">Thank you for your submission! We will be in contact with you shortly.</div>}
+              {formStatus === 'success' && showSuccessPopup && (
+                <div className="success-popup-overlay">
+                  <div className="success-popup">
+                    <h2>Thank you for your submission!</h2>
+                    <p>We will be in contact with you shortly.</p>
+                    <button onClick={handleClosePopup} className="close-popup-button">Close</button>
+                  </div>
+                </div>
+              )}
               {formStatus === 'error' && <div className="error-message">There was an error with your submission. Please try again later.</div>}
             </div>
           </div>

@@ -141,7 +141,6 @@ function BusinessManagementPage() {
               onClick={() => handleEdit(business)}
             >
               <h2>{business.name}</h2>
-              <p>{business.description}</p>
               <p>{business.address}</p>
             </div>
           ))

@@ -106,7 +106,6 @@ function MyBusinessPage() {
           businesses.map(business => (
             <div key={business.id} className="business-card">
               <h2>{business.name}</h2>
-              <p>{business.description}</p>
               <p>{business.address}</p>
               <button className="edit-btn" onClick={() => handleEdit(business)}>
                 <FaPen /> Edit
