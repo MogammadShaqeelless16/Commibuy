@@ -21,7 +21,8 @@ import UserManagementPage from './pages/crm/UserManagementPage';
 import BusinessManagementPage from './pages/crm/BusinessManagementPage';
 import CrmServices from './pages/crm/CrmServices';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import ProtectedRoute from './components/ProtectedRoute'
+import ProtectedRoute from './components/ProtectedRoute';
+import PricingPage from './pages/PricingPage';
 
 function LayoutWrapper({ children }) {
   const location = useLocation();
@@ -51,6 +52,7 @@ function App() {
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
             <Route path="/business" element={<BusinessPage />} />
             <Route path="/business/:businessSlug" element={<BusinessDetailsPage />} />
+            <Route path="/price" element={<PricingPage />} />
 
             {/* Protected CRM Routes */}
             <Route
