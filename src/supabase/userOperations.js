@@ -162,3 +162,33 @@ export const fetchCurrentUser = async () => {
   
     return user?.roles?.role_name; // Adjust based on your schema
   };
+
+  export const uploadProfilePicture = async (file, userId) => {
+    try {
+        const fileName = `${userId}.jpg`; // Use user ID as file name
+
+        // Limit upload to JPG files only
+        if (file.type !== 'image/jpeg') {
+            throw new Error('Only JPG images are allowed');
+        }
+
+        const { data, error } = await supabase
+            .storage
+            .from('profile-pictures')
+            .upload(fileName, file, {
+                cacheControl: '3600',
+                upsert: true // This option allows overwriting existing files
+            });
+
+        if (error) {
+            throw error; // Throw error to handle it in MyProfilePage
+        }
+
+        // Construct the public URL based on user ID
+        const publicURL = `https://hlrzkdxrzczxjmrsvmew.supabase.co/storage/v1/object/public/profile-pictures/${fileName}`;
+        return publicURL; // Return the constructed public URL
+    } catch (error) {
+        console.error('Error uploading file:', error);
+        return null; // Return null on error
+    }
+};
