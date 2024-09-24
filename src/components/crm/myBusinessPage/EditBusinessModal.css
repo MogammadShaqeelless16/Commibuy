@@ -1,0 +1,136 @@
+/* EditBusinessModal.css */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000; /* Ensures modal is above other content */
+}
+
+.modal-content {
+    background-color: #ffffff;
+    border-radius: 8px;
+    padding: 20px;
+    width: 90%;
+    max-width: 900px; /* Adjusted max-width for three columns */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, opacity 0.3s ease;
+    animation: fadeIn 0.3s ease;
+    display: grid; /* Use grid layout */
+    grid-template-columns: repeat(3, 1fr); /* Three equal columns */
+    gap: 15px; /* Space between columns */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+h2 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+    grid-column: span 3; /* Span the header across all columns */
+}
+
+.form-group {
+    width: 100%;
+}
+
+.input-container {
+    position: relative;
+    padding: 0px 5px;
+}
+
+.modal-input,
+.modal-select {
+    width: 100%;
+    padding: 10px;
+    margin-top: 5px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+    color: #333;
+    transition: border-color 0.3s ease;
+    outline: none;
+    background-color: transparent; /* Make the background transparent */
+}
+
+/* Floating label styles */
+.modal-label {
+    position: absolute;
+    left: 12px;
+    top: 10px;
+    color: #999;
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.modal-input:focus,
+.modal-input:not(:placeholder-shown),
+.modal-select:focus,
+.modal-select:not(:placeholder-shown) {
+    border-color: #007bff; /* Change border color on focus */
+}
+
+.modal-input:focus + .modal-label,
+.modal-input:not(:placeholder-shown) + .modal-label,
+.modal-select:focus + .modal-label,
+.modal-select:not(:placeholder-shown) + .modal-label {
+    top: -10px; /* Move the label up */
+    left: 12px; /* Keep the label to the left */
+    font-size: 12px; /* Smaller font size */
+    color: #007bff; /* Change color on focus */
+}
+
+/* Textarea specific styles */
+textarea.modal-input {
+    height: 100px; /* Fixed height for text area */
+}
+
+/* Button styles */
+.modal-buttons {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+    grid-column: span 3; /* Span buttons across all columns */
+}
+
+button {
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-left: 10px;
+}
+
+.save-btn {
+    background-color: #28a745; /* Green for save */
+    color: white;
+}
+
+.save-btn:hover {
+    background-color: #218838; /* Darker green on hover */
+}
+
+.cancel-btn {
+    background-color: #dc3545; /* Red for cancel */
+    color: white;
+}
+
+.cancel-btn:hover {
+    background-color: #c82333; /* Darker red on hover */
+}

@@ -1,8 +1,11 @@
+// MyBusinessPage/MyBusinessPage.js
 import React, { useState, useEffect } from 'react';
-import { supabase } from '../../supabase/supabaseClient'; // Adjust the path as needed
-import { fetchCurrentUser } from '../../supabase/userOperations'; // Adjust the path as needed
+import { supabase } from '../../supabase/supabaseClient';
+import { fetchCurrentUser } from '../../supabase/userOperations';
 import './MyBusinessPage.css';
-import { FaPen, FaSave, FaTimes, FaExternalLinkAlt } from 'react-icons/fa';
+import BusinessList from '../../components/crm/myBusinessPage/BusinessList';
+import EditBusinessModal from '../../components/crm/myBusinessPage/EditBusinessModal';
+import Notification from '../../components/crm/myBusinessPage/Notification';
 import { useNavigate } from 'react-router-dom';
 
 function MyBusinessPage() {
@@ -16,10 +19,10 @@ function MyBusinessPage() {
   useEffect(() => {
     async function fetchBusinesses() {
       try {
-        const userProfile = await fetchCurrentUser(); // Get the current user profile
+        const userProfile = await fetchCurrentUser();
         if (userProfile) {
           const { data: userBusinesses, error: userBusinessesError } = await supabase
-            .from('users_businesses') // Your join table
+            .from('users_businesses')
             .select('business_id')
             .eq('user_id', userProfile.id);
 
@@ -29,9 +32,8 @@ function MyBusinessPage() {
           }
 
           const businessIds = userBusinesses.map(ub => ub.business_id);
-
           const { data: businessesData, error: businessesError } = await supabase
-            .from('businesses') // Replace with your table name
+            .from('businesses')
             .select('*')
             .in('id', businessIds);
 
@@ -77,7 +79,6 @@ function MyBusinessPage() {
         setIsEditing(false);
         setSelectedBusiness(null);
         setEditForm({});
-        // Refresh the list of businesses
         fetchBusinesses();
       }
     } catch (error) {
@@ -98,101 +99,23 @@ function MyBusinessPage() {
   return (
     <div className="my-business-page">
       <h1>My Businesses</h1>
-      <div className="business-list">
-        {businesses.length ? (
-          businesses.map(business => (
-            <div key={business.id} className="business-card">
-              <h2>{business.name}</h2>
-              <p>{business.address}</p>
-              <button className="edit-btn" onClick={() => handleEdit(business)}>
-                <FaPen /> Edit
-              </button>
-            </div>
-          ))
-        ) : (
-          <p>No businesses found.</p>
-        )}
-      </div>
+      <BusinessList businesses={businesses} onEdit={handleEdit} />
 
       {isEditing && (
-        <div className="modal-overlay">
-          <div className="modal-content">
-            <h2>Edit Business</h2>
-            <label>
-              Name:
-              <input
-                type="text"
-                name="name"
-                value={editForm.name || ''}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Description:
-              <textarea
-                name="description"
-                value={editForm.description || ''}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Address:
-              <input
-                type="text"
-                name="address"
-                value={editForm.address || ''}
-                onChange={handleChange}
-              />
-            </label>
-            <label>
-              Template:
-              <select
-                name="template"
-                value={editForm.template || 'template1'}
-                onChange={handleChange}
-              >
-                <option value="template1">Template 1</option>
-                <option value="template2">Template 2</option>
-                <option value="template3">Template 3</option>
-              </select>
-            </label>
-            <label>
-              Font:
-              <select
-                name="font"
-                value={editForm.font || 'Arial'}
-                onChange={handleChange}
-              >
-                <option value="Arial">Arial</option>
-                <option value="Times New Roman">Times New Roman</option>
-                <option value="Courier New">Courier New</option>
-                <option value="Verdana">Verdana</option>
-                <option value="Georgia">Georgia</option>
-                {/* Add more font options as needed */}
-              </select>
-            </label>
-            <div className="modal-buttons">
-              <button className="save-btn" onClick={handleSave}>
-                <FaSave /> Save
-              </button>
-              <button className="cancel-btn" onClick={() => setIsEditing(false)}>
-                <FaTimes /> Cancel
-              </button>
-            </div>
-          </div>
-        </div>
+        <EditBusinessModal
+          editForm={editForm}
+          onChange={handleChange}
+          onSave={handleSave}
+          onCancel={() => setIsEditing(false)}
+        />
       )}
 
       {notification && (
-        <div className="notification-overlay">
-          <div className="notification-content">
-            <p>{notification.message}</p>
-            <button className="visit-btn" onClick={handleVisitWebsite}>
-              Visit Website <FaExternalLinkAlt />
-            </button>
-            <button className="close-btn" onClick={handleCloseNotification}>Close</button>
-          </div>
-        </div>
+        <Notification
+          notification={notification}
+          onVisitWebsite={handleVisitWebsite}
+          onClose={handleCloseNotification}
+        />
       )}
     </div>
   );
