@@ -18,7 +18,6 @@ function MyBusinessPage() {
       try {
         const userProfile = await fetchCurrentUser(); // Get the current user profile
         if (userProfile) {
-          // Fetch businesses associated with the current user
           const { data: userBusinesses, error: userBusinessesError } = await supabase
             .from('users_businesses') // Your join table
             .select('business_id')
@@ -29,10 +28,8 @@ function MyBusinessPage() {
             return;
           }
 
-          // Extract business IDs
           const businessIds = userBusinesses.map(ub => ub.business_id);
 
-          // Fetch details for the businesses
           const { data: businessesData, error: businessesError } = await supabase
             .from('businesses') // Replace with your table name
             .select('*')
@@ -146,6 +143,33 @@ function MyBusinessPage() {
                 value={editForm.address || ''}
                 onChange={handleChange}
               />
+            </label>
+            <label>
+              Template:
+              <select
+                name="template"
+                value={editForm.template || 'template1'}
+                onChange={handleChange}
+              >
+                <option value="template1">Template 1</option>
+                <option value="template2">Template 2</option>
+                <option value="template3">Template 3</option>
+              </select>
+            </label>
+            <label>
+              Font:
+              <select
+                name="font"
+                value={editForm.font || 'Arial'}
+                onChange={handleChange}
+              >
+                <option value="Arial">Arial</option>
+                <option value="Times New Roman">Times New Roman</option>
+                <option value="Courier New">Courier New</option>
+                <option value="Verdana">Verdana</option>
+                <option value="Georgia">Georgia</option>
+                {/* Add more font options as needed */}
+              </select>
             </label>
             <div className="modal-buttons">
               <button className="save-btn" onClick={handleSave}>
