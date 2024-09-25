@@ -1,0 +1,108 @@
+.crm-topnav {
+    position: fixed; /* Fix the top nav at the top */
+    top: 0; 
+    left: 0;
+    right: 0;
+    height: 15vh; /* Adjusted height */
+    background-color: #34495e; /* Background color */
+    color: #ecf0f1; /* Text color */
+    display: flex;
+    justify-content: space-between; /* Space between left and right sections */
+    align-items: center; /* Center vertically */
+    padding: 0 20px; /* Add horizontal padding */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Subtle shadow for depth */
+    z-index: 1000; /* Ensure it stays above other content */
+  }
+  
+  .crm-logo h2 {
+    margin: 0; /* Remove margin */
+    font-size: 20px; /* Logo size */
+    color: #ecdbba; /* Logo color */
+  }
+  
+  .nav-left {
+    flex-grow: 1; /* Allow left section to grow */
+  }
+  
+  .nav-right {
+    display: flex; /* Flex container for right side */
+    align-items: center; /* Center vertically */
+  }
+  
+  .nav-links {
+    display: flex; /* Flex container for nav links */
+    margin-left: auto; /* Align to the right */
+    list-style: none; /* Remove bullet points */
+    padding: 0; /* Remove padding */
+  }
+  
+  .nav-links li {
+    position: relative; /* Position for dropdown */
+    margin-right: 20px; /* Space between dropdown items */
+  }
+  
+  .dropdown-button {
+    background: none; /* No background */
+    border: none; /* No border */
+    color: #ecf0f1; /* Text color for button */
+    font-size: 16px; /* Button text size */
+    cursor: pointer; /* Pointer on hover */
+  }
+  
+  .dropdown-menu, .admin-menu {
+    position: absolute; /* Absolute positioning for dropdowns */
+    background: #34495e; /* Match sidebar background */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Shadow for dropdown */
+    z-index: 1000; /* Ensure dropdown is above other elements */
+    list-style: none; /* Remove bullet points */
+    padding: 10px 0; /* Space inside dropdown */
+  }
+  
+  .dropdown-menu li, .admin-menu li {
+    padding: 8px 20px; /* Space for dropdown items */
+  }
+  
+  .profile-container {
+    display: flex; /* Flex container for profile */
+    align-items: center; /* Center vertically */
+    margin-left: 20px; /* Spacing between profile and logout */
+  }
+
+  .profile-container:hover {
+    background-color: rgba(255, 255, 255, 0.2); /* Semi-transparent background on hover */
+    border-radius: 5px; /* Rounded corners */
+    padding: 5px 10px; /* Padding to make it look nice on hover */
+  }
+  
+  .profile-image {
+    width: 30px; /* Profile image size */
+    height: 30px; /* Profile image size */
+    border-radius: 50%; /* Circular image */
+    margin-right: 10px; /* Spacing */
+  }
+  
+  .logout-button {
+    background: none; /* No background */
+    border: none; /* No border */
+    color: #e74c3c; /* Red color for logout */
+    font-size: 16px; /* Button text size */
+    cursor: pointer; /* Pointer on hover */
+  }
+  
+  .logout-button:hover {
+    color: #c0392b; /* Darker red on hover */
+  }
+  
+  /* Admin Button */
+  .admin-dropdown {
+    position: relative; /* Position for admin dropdown */
+  }
+  
+  .admin-dropdown .admin-button {
+    background: none; /* No background */
+    border: none; /* No border */
+    color: #ecf0f1; /* Text color for button */
+    font-size: 16px; /* Button text size */
+    cursor: pointer; /* Pointer on hover */
+  }
+  

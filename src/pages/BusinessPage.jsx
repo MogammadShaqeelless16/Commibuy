@@ -26,7 +26,7 @@ function BusinessPage() {
 
   return (
     <div className="business-page">
-      <h1>Business Listing</h1>
+      <h1 className="business-listing-title">Business Listing</h1>
       <div className="search-container">
         <input
           type="text"
@@ -39,7 +39,8 @@ function BusinessPage() {
           <i className="fas fa-search"></i>
         </button>
       </div>
-      <div className="business-list">
+
+      <div className="business-grid">
         {filteredBusinesses.length ? (
           filteredBusinesses.map(business => (
             <div key={business.id} className="business-card">

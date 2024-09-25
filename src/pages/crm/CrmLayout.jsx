@@ -6,10 +6,10 @@ import {
 } from 'react-icons/fa';
 import './CrmLayout.css';
 import { fetchCurrentUserRole } from '../../supabase/userOperations'; // Adjust the path
+import CrmTopnav from '../../components/CrmTopnav';
 
 function CrmLayout() {
   const navigate = useNavigate();
-  const [showAdminMenu, setShowAdminMenu] = useState(false);
   const [userRole, setUserRole] = useState(null);
 
   useEffect(() => {
@@ -31,12 +31,9 @@ function CrmLayout() {
     navigate('/');
   };
 
-  const toggleAdminMenu = () => {
-    setShowAdminMenu(prevState => !prevState);
-  };
-
   return (
     <div className="crm-layout">
+      <CrmTopnav userRole={userRole} handleLogout={handleLogout} />
       <aside className="crm-sidebar">
         <ul className="crm-menu">
           <li>
@@ -74,29 +71,7 @@ function CrmLayout() {
               <FaBusinessTime /> My Business
             </Link>
           </li>
-          <li>
-            <Link to="/crm/my-profile">
-              <FaUser /> My Profile
-            </Link>
-          </li>
-          {(userRole === 'Admin' || userRole === 'Developer') && (
-            <li>
-              <button onClick={toggleAdminMenu} className="dropdown-toggle">
-                Admin
-              </button>
-              {showAdminMenu && (
-                <ul className="admin-menu">
-                  <li><Link to="/crm/admin/user-management">User Management</Link></li>
-                  <li><Link to="/crm/admin/business-management">Business Management</Link></li>
-                </ul>
-              )}
-            </li>
-          )}
-          <li>
-            <button onClick={handleLogout} className="logout-button">
-              <FaSignOutAlt /> Logout
-            </button>
-          </li>
+          {/* Removed Admin section from Sidebar */}
         </ul>
       </aside>
 

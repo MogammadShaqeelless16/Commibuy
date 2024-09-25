@@ -1,15 +1,9 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
-import { FaTachometerAlt, FaUsers, FaBoxOpen, FaClipboardList, FaSignOutAlt, FaUserTie, FaUser, FaBusinessTime } from 'react-icons/fa';
+import { FaTachometerAlt, FaUsers, FaBoxOpen, FaClipboardList, FaUser, FaBusinessTime } from 'react-icons/fa';
 import './Sidebar.css';
 
 function Sidebar() {
-  const [showAdminMenu, setShowAdminMenu] = useState(false);
-
-  const toggleAdminMenu = () => {
-    setShowAdminMenu(prevState => !prevState);
-  };
-
   return (
     <aside className="crm-sidebar">
       <h2>CRM Menu</h2>
@@ -48,17 +42,6 @@ function Sidebar() {
           <Link to="/crm/my-profile">
             <FaUser /> My Profile
           </Link>
-        </li>
-        <li>
-          <button onClick={toggleAdminMenu} className="dropdown-toggle">
-            Admin
-          </button>
-          {showAdminMenu && (
-            <ul className="admin-menu">
-              <li><Link to="/crm/admin/user-management">User Management</Link></li>
-              <li><Link to="/crm/admin/business-management">Business Management</Link></li>
-            </ul>
-          )}
         </li>
         <li>
           <button className="logout-button">

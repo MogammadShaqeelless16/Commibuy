@@ -1,47 +1,63 @@
 .crm-layout {
-    display: flex;
-    height: 100vh; /* Full page height */
-  }
-  
-  .crm-sidebar {
-    width: 250px;
-    background-color: #333;
-    color: #fff;
-    padding: 20px;
-  }
-  
-  .crm-sidebar h2 {
-    font-size: 24px;
-    margin-bottom: 20px;
-  }
-  
-  .crm-sidebar ul {
-    list-style: none;
-    padding: 0;
-  }
-  
-  .crm-sidebar ul li {
-    margin-bottom: 15px;
-  }
-  
-  .crm-sidebar ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 18px;
-    display: block;
-    padding: 10px;
-    border-radius: 4px;
-    transition: background-color 0.3s ease;
-  }
-  
-  .crm-sidebar ul li a:hover {
-    background-color: #555;
-  }
-  
-  .crm-content {
-    flex-grow: 1;
-    padding: 20px;
-    background-color: #f4f4f4;
-    overflow-y: auto;
-  }
-  
+  display: flex;
+  height: 100vh; /* Full page height */
+  padding-top: 12vh; /* Space for the fixed top nav */
+}
+
+.crm-sidebar {
+  width: 250px;
+  background-color: #2c3e50; /* Darker color for sidebar */
+  color: #ecf0f1; /* Light color for text */
+  padding: 20px;
+  box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.crm-sidebar h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+  text-align: center; /* Centered heading */
+  color: #ecdbba; /* Softer color for the heading */
+}
+
+.crm-sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.crm-sidebar ul li {
+  margin-bottom: 15px;
+}
+
+.crm-sidebar ul li a {
+  color: #ecf0f1; /* Light text color */
+  text-decoration: none;
+  font-size: 18px;
+  display: flex;
+  align-items: center; /* Align icon and text */
+  padding: 10px 15px; /* Add some padding */
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease; /* Smooth transitions */
+}
+
+.crm-sidebar ul li a:hover {
+  background-color: #34495e; /* Slightly lighter hover effect */
+  color: #ffffff; /* Change text color on hover */
+}
+
+.admin-menu {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px; /* Space between admin menu and other items */
+}
+
+.admin-menu li a {
+  padding-left: 30px; /* Indent for sub-menu items */
+}
+
+.crm-content {
+  flex-grow: 1;
+  padding: 20px;
+  background-color: #ecf0f1; /* Light background for content */
+  overflow-y: auto; /* Allow scrolling if content overflows */
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.1);
+}
