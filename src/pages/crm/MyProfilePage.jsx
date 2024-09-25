@@ -99,9 +99,9 @@ function MyProfilePage() {
                 alt="Profile"
               />
               {imageSelected ? (
-                <span className="upload-text">Image selected</span>
+                <span className="upload-text"></span>
               ) : (
-                <span className="upload-text">Select an image</span>
+                <span className="upload-text"></span>
               )}
             </div>
           </label>

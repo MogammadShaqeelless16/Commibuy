@@ -13,16 +13,6 @@ function CrmTopnav({ userRole, handleLogout }) {
   const [user, setUser] = useState(null); // State to store user data
   const navigate = useNavigate();
 
-  // Toggle the Reports dropdown
-  const toggleReportsDropdown = () => {
-    setShowReportsDropdown(prevState => !prevState);
-  };
-
-  // Toggle the Admin dropdown
-  const toggleAdminDropdown = () => {
-    setShowAdminDropdown(prevState => !prevState);
-  };
-
   // Fetch user data from Supabase
   useEffect(() => {
     const fetchUserData = async () => {
@@ -47,8 +37,12 @@ function CrmTopnav({ userRole, handleLogout }) {
 
       <div className="nav-right">
         <ul className="nav-links">
-          <li className="reports-dropdown">
-            <button onClick={toggleReportsDropdown} className="dropdown-button">
+          <li 
+            className="reports-dropdown" 
+            onMouseEnter={() => setShowReportsDropdown(true)} 
+            onMouseLeave={() => setShowReportsDropdown(false)}
+          >
+            <button className="dropdown-button">
               <FaChartBar /> Reports
             </button>
             {showReportsDropdown && (
@@ -62,11 +56,16 @@ function CrmTopnav({ userRole, handleLogout }) {
               </ul>
             )}
           </li>
+
           {/* Admin Links */}
           {(userRole === 'Admin' || userRole === 'Developer') && (
-            <li className="admin-dropdown">
-              <button onClick={toggleAdminDropdown} className="admin-button">
-              <FaLockOpen />Admin
+            <li 
+              className="admin-dropdown" 
+              onMouseEnter={() => setShowAdminDropdown(true)} 
+              onMouseLeave={() => setShowAdminDropdown(false)}
+            >
+              <button className="admin-button">
+                <FaLockOpen /> Admin
               </button>
               {showAdminDropdown && (
                 <ul className="admin-menu">
