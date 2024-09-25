@@ -37,6 +37,7 @@ function BusinessManagementPage() {
     setSelectedBusiness({
       name: '',
       address: '',
+      slug: '',  // Initialize slug field
       registered: false,
       active: false,
       email: '',
@@ -67,6 +68,7 @@ function BusinessManagementPage() {
         .update({
           name: selectedBusiness.name,
           address: selectedBusiness.address,
+          slug: selectedBusiness.slug,  // Include slug in the update
           registered: selectedBusiness.registered,
           active: selectedBusiness.active,
           email: selectedBusiness.email,
@@ -88,6 +90,7 @@ function BusinessManagementPage() {
         .insert([{
           name: selectedBusiness.name,
           address: selectedBusiness.address,
+          slug: selectedBusiness.slug,  // Include slug in the insert
           registered: selectedBusiness.registered,
           active: selectedBusiness.active,
           email: selectedBusiness.email,
@@ -142,6 +145,7 @@ function BusinessManagementPage() {
             >
               <h2>{business.name}</h2>
               <p>{business.address}</p>
+              <p>{business.slug}</p> {/* Display the slug if needed */}
             </div>
           ))
         ) : (
@@ -154,60 +158,83 @@ function BusinessManagementPage() {
         <div className="modal">
           <div className="modal-content">
             <h2>{isEditMode ? 'Edit Business' : 'Add Business'}</h2>
-            <label>
-              Name:
-              <input
-                type="text"
-                name="name"
-                value={selectedBusiness.name}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Address:
-              <input
-                type="text"
-                name="address"
-                value={selectedBusiness.address}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Registered:
-              <input
-                type="checkbox"
-                name="registered"
-                checked={selectedBusiness.registered}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Active:
-              <input
-                type="checkbox"
-                name="active"
-                checked={selectedBusiness.active}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Email:
-              <input
-                type="text"
-                name="email"
-                value={selectedBusiness.email}
-                onChange={handleInputChange}
-              />
-            </label>
-            <label>
-              Contact Number:
-              <input
-                type="text"
-                name="contact_number"
-                value={selectedBusiness.contact_number}
-                onChange={handleInputChange}
-              />
-            </label>
+            <div className="form-group">
+              <label>
+                Name:
+                <input
+                  type="text"
+                  name="name"
+                  value={selectedBusiness.name}
+                  onChange={handleInputChange}
+                />
+              </label>
+            </div>
+            <div className="form-group">
+              <label>
+                Address:
+                <input
+                  type="text"
+                  name="address"
+                  value={selectedBusiness.address}
+                  onChange={handleInputChange}
+                />
+              </label>
+            </div>
+            <div className="form-group">
+              <label>
+                Slug:
+                <input
+                  type="text"
+                  name="slug"
+                  value={selectedBusiness.slug}
+                  onChange={handleInputChange}
+                />
+              </label>
+            </div>
+            <div className="form-group">
+              <label>
+                Registered:
+                <input
+                  type="checkbox"
+                  name="registered"
+                  checked={selectedBusiness.registered}
+                  onChange={handleInputChange}
+                />
+              </label>
+            </div>
+            <div className="form-group">
+              <label>
+                Active:
+                <input
+                  type="checkbox"
+                  name="active"
+                  checked={selectedBusiness.active}
+                  onChange={handleInputChange}
+                />
+              </label>
+            </div>
+            <div className="form-group">
+              <label>
+                Email:
+                <input
+                  type="text"
+                  name="email"
+                  value={selectedBusiness.email}
+                  onChange={handleInputChange}
+                />
+              </label>
+            </div>
+            <div className="form-group">
+              <label>
+                Contact Number:
+                <input
+                  type="text"
+                  name="contact_number"
+                  value={selectedBusiness.contact_number}
+                  onChange={handleInputChange}
+                />
+              </label>
+            </div>
             <div className="modal-actions">
               <button className="save-button" onClick={handleSave}>
                 {isEditMode ? 'Save' : 'Add'}
