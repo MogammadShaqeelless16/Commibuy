@@ -1,4 +1,3 @@
-// MyProfilePage.jsx
 import React, { useState, useEffect } from 'react';
 import { fetchCurrentUser, updateUserProfile, uploadProfilePicture } from '../../supabase/userOperations'; // Adjust the path as needed
 import './MyProfilePage.css';
@@ -12,8 +11,10 @@ function MyProfilePage() {
     address: ''
   });
   const [uploadSuccess, setUploadSuccess] = useState(false);
-  const [imageSelected, setImageSelected] = useState(false); // Track if an image is selected
-  const [isEditing, setIsEditing] = useState(false); // Track editing state
+  const [imageSelected, setImageSelected] = useState(false);
+  const [isEditing, setIsEditing] = useState(false);
+  const [showUpgradeDropdown, setShowUpgradeDropdown] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState('');
 
   useEffect(() => {
     async function fetchProfile() {
@@ -42,7 +43,7 @@ function MyProfilePage() {
   const handleFileChange = async (e) => {
     const file = e.target.files[0];
     if (file) {
-      setImageSelected(true); // Indicate that an image has been selected
+      setImageSelected(true);
       const publicURL = await uploadProfilePicture(file, profile.id);
       if (publicURL) {
         const updatedProfile = {
@@ -68,10 +69,16 @@ function MyProfilePage() {
     const success = await updateUserProfile(profile.id, formData);
     if (success) {
       setProfile({ ...profile, ...formData });
-      setIsEditing(false); // Exit editing mode after saving
+      setIsEditing(false);
     } else {
       alert('Error updating profile. Please try again.');
     }
+  };
+
+  const handleUpgradeRequest = () => {
+    // Logic for handling the upgrade request, e.g., sending it to your backend
+    console.log('Requested upgrade to:', selectedPlan);
+    alert(`Requested upgrade to: ${selectedPlan}`);
   };
 
   return (
@@ -84,7 +91,7 @@ function MyProfilePage() {
               id="profile-picture-input"
               accept=".jpg, .png"
               onChange={handleFileChange}
-              style={{ display: 'none' }} // Hide the file input
+              style={{ display: 'none' }}
             />
             <div className="image-preview">
               <img
@@ -148,10 +155,70 @@ function MyProfilePage() {
               <p><strong>Email:</strong> {profile?.email}</p>
               <p><strong>Bio:</strong> {profile?.bio || 'No bio available'}</p>
               <p><strong>Address:</strong> {profile?.address || 'No address available'}</p>
-              <p><strong>Role:</strong> {profile?.role}</p>
+              <p><strong>Role:</strong> {profile?.role_name}</p>
               <button className="edit-button" onClick={() => setIsEditing(true)}>Edit Profile</button>
             </div>
           )}
+        </div>
+      </div>
+
+      {/* Details Container */}
+      <div className="profile-details-container">
+        {/* Current Plan Block */}
+        <div className="details-block">
+          <h3>Current Plan</h3>
+          <p><strong>Plan:</strong> {profile?.plan || 'Not specified'}</p>
+          <button className="edit-button" onClick={() => setShowUpgradeDropdown(!showUpgradeDropdown)}>
+            Request an Update
+          </button>
+          {showUpgradeDropdown && (
+            <select onChange={(e) => setSelectedPlan(e.target.value)} value={selectedPlan}>
+              <option value="" disabled>Select a plan</option>
+              <option value="Basic">Basic</option>
+              <option value="Pro">Pro</option>
+              <option value="Premium">Premium</option>
+            </select>
+          )}
+          {selectedPlan && (
+            <button className="save-button" onClick={handleUpgradeRequest}>Confirm Upgrade</button>
+          )}
+        </div>
+
+        {/* Settings Block */}
+        <div className="details-block">
+          <h3>Settings</h3>
+          <p><strong>Permissions:</strong></p>
+          <label>
+            <input type="checkbox" checked={profile?.permissions?.can_edit} readOnly />
+            Edit Profile
+          </label>
+          <label>
+            <input type="checkbox" checked={profile?.permissions?.can_view_reports} readOnly />
+            View Reports
+          </label>
+          <label>
+            <input type="checkbox" checked={profile?.permissions?.can_manage_users} readOnly />
+            Manage Users
+          </label>
+          <button className="edit-button">Edit Settings</button>
+        </div>
+
+        {/* Integrations Block */}
+        <div className="details-block">
+          <h3>Integrations</h3>
+          <p><strong>Email Campaign:</strong> Active</p>
+          <p><strong>Zapier:</strong> Connected</p>
+          <p><strong>CRM Integration:</strong> Active</p>
+          <button className="edit-button">Edit Integrations</button>
+        </div>
+
+        {/* Bank Details Block */}
+        <div className="details-block">
+          <h3>Bank Details</h3>
+          <p><strong>Bank Name:</strong> {profile?.bank_details?.bank_name || 'Not provided'}</p>
+          <p><strong>Account Number:</strong> {profile?.bank_details?.account_number || 'Not provided'}</p>
+          <p><strong>IBAN:</strong> {profile?.bank_details?.iban || 'Not provided'}</p>
+          <button className="edit-button">Edit Bank Details</button>
         </div>
       </div>
 
