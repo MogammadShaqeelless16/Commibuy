@@ -1,40 +1,42 @@
-// components/Team.js
 import React from 'react';
 import './Team.css';
+import CEO from '../assets/team/CEOMalakai.png';
+import COO from '../assets/team/COODelisha.png';
+import CTO from '../assets/team/CTOShaqeel.png';
 
 // Sample team member data
 const teamMembers = [
   {
     id: 1,
-    name: 'John Doe',
+    name: 'Malakai Johnson',
     title: 'CEO',
-    description: 'John is the visionary behind our company, dedicated to empowering local businesses.',
-    image: '/path-to-john-image.jpg', // Replace with actual image path
+    description: 'Malakai is the visionary behind our company, dedicated to empowering local businesses.',
+    image: CEO, // Correct image import
     socialLinks: {
-      linkedin: 'https://www.linkedin.com/in/johndoe',
-      twitter: 'https://twitter.com/johndoe',
+      linkedin: 'https://www.linkedin.com/in/malakailink',
+      twitter: 'https://twitter.com/malakai',
     },
   },
   {
     id: 2,
-    name: 'Jane Smith',
+    name: 'Shaqeel Less',
     title: 'CTO',
-    description: 'Jane leads our tech team with a focus on innovation and sustainability.',
-    image: '/path-to-jane-image.jpg', // Replace with actual image path
+    description: 'Shaqeel leads our tech team with a focus on innovation and sustainability.',
+    image: CTO, // Correct image import
     socialLinks: {
-      linkedin: 'https://www.linkedin.com/in/janesmith',
-      twitter: 'https://twitter.com/janesmith',
+      linkedin: 'https://www.linkedin.com/in/shaqeellink',
+      twitter: 'https://twitter.com/shaqeel',
     },
   },
   {
     id: 3,
-    name: 'Alice Johnson',
-    title: 'CMO',
-    description: 'Alice drives our marketing strategies, connecting us with the community.',
-    image: '/path-to-alice-image.jpg', // Replace with actual image path
+    name: 'Delisha Smith',
+    title: 'COO',
+    description: 'Delisha drives our operational strategies, ensuring efficiency and growth.',
+    image: COO, // Correct image import
     socialLinks: {
-      linkedin: 'https://www.linkedin.com/in/alicejohnson',
-      twitter: 'https://twitter.com/alicejohnson',
+      linkedin: 'https://www.linkedin.com/in/delishasmith',
+      twitter: 'https://twitter.com/delisha',
     },
   },
 ];
