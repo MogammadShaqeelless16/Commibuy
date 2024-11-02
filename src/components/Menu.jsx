@@ -10,7 +10,8 @@ function Menu() {
       <div className="menu-container">
         <div className="menu-logo">
           <img src={logo} alt="Commibuy Logo" className="logo-image" />
-          <span className="company-name">Commibuy</span>
+          <span className="company-name">Commi</span>
+          <span className="ploy">ploy</span>
         </div>
         <div className="menu-links">
           <Link to="/">Home</Link>

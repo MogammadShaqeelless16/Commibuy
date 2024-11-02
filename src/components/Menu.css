@@ -97,4 +97,10 @@
   .divider {
     display: none; /* Hide dividers on mobile for cleaner look */
   }
+
+  .ploy {
+    color: #7ed957;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
 }
