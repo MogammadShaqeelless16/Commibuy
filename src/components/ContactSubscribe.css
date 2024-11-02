@@ -1,37 +1,56 @@
 /* ContactSubscribe.css */
 
 .contact-subscribe {
-    padding: 2rem;
-    text-align: center;
-    background-color: #ffffff;
-  }
-  
-  .contact-subscribe h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-  
-  .contact-subscribe form {
-    display: flex;
-    justify-content: center;
-    gap: 0.5rem;
-    margin-top: 1rem;
-  }
-  
-  .contact-subscribe input[type="email"] {
-    padding: 0.7rem;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    width: 250px;
-  }
-  
-  .contact-subscribe .btn {
-    padding: 0.7rem 1.5rem;
-    background-color: #ffdd57;
-    color: #333;
-    border: none;
-    cursor: pointer;
-    font-weight: bold;
-    text-transform: uppercase;
-  }
-  
+  padding: 40px 20px; /* Add vertical padding */
+  text-align: center; /* Center text for a clean layout */
+  border-radius: 8px; /* Soft rounded corners */
+  max-width: 600px; /* Limit the width for better readability */
+  margin: 20px auto; /* Center the section */
+}
+
+.contact-subscribe h2 {
+  font-size: 2rem; /* Larger font for the heading */
+  margin-bottom: 10px; /* Space below the heading */
+  color: #333; /* Dark text for contrast */
+}
+
+.contact-subscribe p {
+  font-size: 1rem; /* Normal font size for the description */
+  margin-bottom: 20px; /* Space below the paragraph */
+  color: #666; /* Slightly lighter text color */
+}
+
+.subscribe-form {
+  display: flex; /* Flexbox for input and button alignment */
+  justify-content: center; /* Center items */
+  gap: 10px; /* Space between input and button */
+}
+
+.email-input {
+  flex: 1; /* Allow the input to grow */
+  padding: 10px; /* Padding for better usability */
+  font-size: 1rem; /* Font size for input text */
+  border: 1px solid #ccc; /* Light border */
+  border-radius: 4px; /* Rounded corners */
+  outline: none; /* Remove outline on focus */
+  transition: border-color 0.3s; /* Smooth transition for border color */
+}
+
+.email-input:focus {
+  border-color: #4CAF50; /* Change border color on focus */
+}
+
+.subscribe-button {
+  background-color: #4CAF50; /* Primary button color */
+  color: #fff; /* White text */
+  padding: 10px 15px; /* Padding for button */
+  border: none; /* Remove default border */
+  border-radius: 4px; /* Rounded corners */
+  cursor: pointer; /* Pointer cursor for interaction */
+  font-size: 1rem; /* Font size for button text */
+  transition: background-color 0.3s; /* Smooth transition for background color */
+}
+
+.subscribe-button:hover {
+  background-color: #45a049; /* Darker shade on hover */
+}

@@ -1,81 +1,74 @@
+/* Footer.css */
+
 .footer {
-    background: #333;
-    color: #fff;
-    padding: 20px 0;
-    text-align: center;
-  }
-  
-  .footer .container {
-    max-width: 1200px;
-    margin: 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .footer-logo {
-    margin-bottom: 20px;
-  }
-  
-  .footer-logo-image {
-    height: 40px;
-  }
-  
-  .footer-logo-text {
-    font-size: 24px;
-    font-weight: bold;
-    margin-left: 10px;
-  }
-  
-  .footer-links {
-    margin-bottom: 20px;
-  }
-  
-  .footer-links ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-  }
-  
-  .footer-links li {
-    display: inline;
-    margin: 0 10px;
-  }
-  
-  .footer-links a {
-    color: #fff;
-    text-decoration: none;
-    font-weight: 500;
-  }
-  
-  .footer-links a:hover {
-    color: #00c6ff;
-  }
-  
-  .footer-info {
-    font-size: 14px;
-  }
-  
-  .footer-info a {
-    color: #00c6ff;
-    text-decoration: none;
-  }
-  
-  .footer-info a:hover {
-    text-decoration: underline;
-  }
-  
-  .social-media {
-    margin-top: 10px;
-  }
-  
-  .social-media a {
-    font-size: 20px;
-    margin: 0 10px;
-    transition: color 0.3s;
-  }
-  
-  .social-media a:hover {
-    color: #00c6ff;
-  }
-  
+  background-color: #333; /* Dark background */
+  color: #fff; /* White text for contrast */
+  padding: 40px 20px; /* Padding for spacing */
+  text-align: center; /* Center text */
+}
+
+.footer-container {
+  display: flex; /* Flexbox layout */
+  flex-wrap: wrap; /* Wrap items on smaller screens */
+  justify-content: space-between; /* Space between sections */
+  max-width: 1200px; /* Limit max width */
+  margin: 0 auto; /* Center footer */
+}
+
+.footer-logo {
+  display: flex; /* Flex container for logo and name */
+  align-items: center; /* Center vertically */
+}
+
+.footer-logo-image {
+  height: 50px; /* Logo height */
+  margin-right: 10px; /* Space between logo and name */
+}
+
+.footer-company-name {
+  font-size: 1.5rem; /* Larger font for company name */
+  font-weight: bold; /* Bold text */
+}
+
+.footer-links, .footer-menu {
+  margin: 20px; /* Space around sections */
+}
+
+.footer-links h3, .footer-menu h3 {
+  font-size: 1.2rem; /* Font size for headings */
+  margin-bottom: 10px; /* Space below headings */
+}
+
+.footer-links ul, .footer-menu ul {
+  list-style: none; /* Remove bullet points */
+  padding: 0; /* Remove padding */
+}
+
+.footer-links li, .footer-menu li {
+  margin: 5px 0; /* Space between links */
+}
+
+.footer-links a, .footer-menu a {
+  color: #4CAF50; /* Link color */
+  text-decoration: none; /* Remove underline */
+}
+
+.footer-links a:hover, .footer-menu a:hover {
+  text-decoration: underline; /* Underline on hover */
+}
+
+.social-media {
+  margin-top: 10px; /* Space above social media links */
+}
+
+.social-media a {
+  margin: 0 10px; /* Space between social media links */
+  color: #4CAF50; /* Same color for consistency */
+  font-size: 1.2rem; /* Font size for icons */
+}
+
+.footer-bottom {
+  margin-top: 20px; /* Space above bottom text */
+  font-size: 0.9rem; /* Smaller font size */
+  color: #ccc; /* Lighter text color for bottom */
+}

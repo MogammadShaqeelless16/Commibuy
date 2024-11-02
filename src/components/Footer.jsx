@@ -1,43 +1,46 @@
+// components/Footer.js
 import React from 'react';
-import { Link } from 'react-router-dom';
-import './Footer.css'; // Make sure this CSS file is updated accordingly
-import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin } from 'react-icons/fa';
-import Logo from './Logo'; // Ensure this path is correct
+import './Footer.css';
+import logo from '../assets/commibuy.png'; // Update the path to your logo image
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTwitter, faLinkedin, faGithub } from '@fortawesome/free-brands-svg-icons';
 
 function Footer() {
   return (
     <footer className="footer">
-      <div className="container">
-        <div className="footer-content">
-          {/* Logo Section */}
-          <div className="footer-logo">
-            <Link to="/" className="logo-link">
-              <Logo />
-            </Link>
-          </div>
-
-          {/* Centered "Made by" Section */}
-          <div className="footer-info">
-            <p>&copy; {new Date().getFullYear()} SupportBuy. All rights reserved.</p>
-            <p>Made by <a href="https://www.softglitchsolutions.com" target="_blank" rel="noopener noreferrer">SoftGlitchSolutions</a></p>
-          </div>
-
-          {/* Social Media Links */}
-          <div className="footer-social">
-            <a href="https://www.facebook.com" target="_blank" rel="noopener noreferrer" className="social-link">
-              <FaFacebook />
+      <div className="footer-container">
+        <div className="footer-logo">
+          <img src={logo} alt="Commiploy Logo" className="footer-logo-image" />
+          <span className="footer-company-name">Commiploy</span>
+        </div>
+        <div className="footer-links">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="/terms">Terms and Conditions</a></li>
+            <li><a href="/popia">POPIA Act</a></li>
+          </ul>
+        </div>
+        <div className="footer-menu">
+          <h3>Admin Menu</h3>
+          <ul>
+            <li><a href="/login">Login</a></li>
+            <li><a href="/signup">Sign Up</a></li>
+          </ul>
+          <div className="social-media">
+            <a href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faTwitter} size="lg" />
             </a>
-            <a href="https://www.twitter.com" target="_blank" rel="noopener noreferrer" className="social-link">
-              <FaTwitter />
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faLinkedin} size="lg" />
             </a>
-            <a href="https://www.instagram.com" target="_blank" rel="noopener noreferrer" className="social-link">
-              <FaInstagram />
-            </a>
-            <a href="https://www.linkedin.com" target="_blank" rel="noopener noreferrer" className="social-link">
-              <FaLinkedin />
+            <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+              <FontAwesomeIcon icon={faGithub} size="lg" />
             </a>
           </div>
         </div>
+      </div>
+      <div className="footer-bottom">
+        <p>© {new Date().getFullYear()} Commiploy. All rights reserved.</p>
       </div>
     </footer>
   );
