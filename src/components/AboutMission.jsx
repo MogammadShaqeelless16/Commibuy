@@ -1,8 +1,25 @@
 // components/AboutMission.js
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import './AboutMission.css';
 
+const images = [
+  '/path-to-image1.jpg',
+  '/path-to-image2.jpg',
+  '/path-to-image3.jpg',
+  // Add more images as needed
+];
+
 function AboutMission() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
+    }, 3000); // Change image every 3 seconds
+
+    return () => clearInterval(interval); // Clean up on component unmount
+  }, []);
+
   return (
     <section className="about-mission">
       <div className="mission-text">
@@ -13,8 +30,8 @@ function AboutMission() {
           and support businesses in their local area.
         </p>
       </div>
-      <div className="mission-image">
-        <img src="/path-to-mission-image.jpg" alt="Our Mission" />
+      <div className="mission-gallery">
+        <img src={images[currentImageIndex]} alt="Our Mission" />
       </div>
     </section>
   );

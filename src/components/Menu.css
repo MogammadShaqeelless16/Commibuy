@@ -11,8 +11,8 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  width: 80%; /* Centered content, adjust width as needed */
-  max-width: 1200px; /* Optional: set a max width to avoid excessive stretching */
+  width: 80%;
+  max-width: 1200px;
 }
 
 .menu-logo {
@@ -21,7 +21,7 @@
 }
 
 .logo-image {
-  height: 40px; /* Adjust as needed */
+  height: 40px;
   width: auto;
   margin-right: 0.5rem;
 }
@@ -51,7 +51,50 @@
 }
 
 .divider {
-  color: #555; /* Divider color */
+  color: #555;
   margin: 0 0.5rem;
   font-weight: bold;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .menu-container {
+    width: 90%; /* Adjust width on tablets */
+  }
+
+  .menu-links {
+    gap: 0.5rem; /* Reduce spacing between links */
+  }
+
+  .menu-links a {
+    font-size: 1rem;
+    padding: 0.5rem; /* Smaller padding for each link */
+  }
+}
+
+@media (max-width: 480px) {
+  .menu-container {
+    flex-direction: column;
+    align-items: center;
+    padding: 0.5rem 0; /* Additional padding for compact layout */
+  }
+
+  .menu-logo {
+    margin-bottom: 0.75rem; /* Spacing between logo and links on mobile */
+  }
+
+  .menu-links {
+    flex-direction: column;
+    gap: 0.25rem; /* Reduced gap for stacked items */
+    align-items: center;
+  }
+
+  .menu-links a {
+    font-size: 0.95rem; /* Slightly smaller font size */
+    padding: 0.4rem 0.6rem;
+  }
+
+  .divider {
+    display: none; /* Hide dividers on mobile for cleaner look */
+  }
 }
