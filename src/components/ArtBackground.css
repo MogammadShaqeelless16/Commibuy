@@ -1,0 +1,35 @@
+/* ArtBackground.css */
+
+.art-background {
+    position: relative;
+    width: 100%;
+    z-index: 1; /* Ensure content is on top of background images */
+    height: 100vh; /* Adjust based on your layout needs */
+    overflow: hidden; /* Ensures images do not overflow the container */
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8), rgba(0, 0, 0, 0.2)); /* Optional gradient overlay */
+  }
+  
+  .background-image {
+    position: absolute;
+    z-index: 1; /* Ensure content is on top of background images */
+    opacity: 0.6; /* Adjust opacity for better visibility */
+    pointer-events: none; /* Ensures clicks go through to the content */
+    transition: transform 0.5s ease-in-out; /* Smooth transition for transformation */
+  }
+  
+  /* Adding hover effect to background images */
+  .background-image:hover {
+    transform: scale(1.1); /* Slightly enlarge image on hover */
+  }
+  
+  /* Optional: Adding media queries for responsiveness */
+  @media (max-width: 768px) {
+    .background-image {
+      opacity: 0.5; /* More opacity for mobile for better visibility */
+    }
+  
+    .content-container {
+      padding: 10px; /* Reduce padding on smaller screens */
+    }
+  }
+  

@@ -2,8 +2,8 @@
 
 .features {
     padding: 2rem;
-    text-align: center;
     background-color: #f9f9f9;
+    text-align: center; /* Center text for better layout */
   }
   
   .features h2 {
@@ -14,42 +14,38 @@
   
   .feature-boxes {
     display: flex;
-    gap: 1.5rem;
-    justify-content: center;
-    flex-wrap: wrap;
+    justify-content: center; /* Center feature boxes */
+    gap: 2rem; /* Space between feature boxes */
+    flex-wrap: wrap; /* Allows boxes to wrap on smaller screens */
   }
   
   .feature-box {
-    flex: 1 1 250px;
-    padding: 2rem;
-    text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    border-radius: 12px;
-
-    cursor: pointer;
-    max-width: 300px;
+    background-color: #fff; /* White background for feature boxes */
+    border: 1px solid #ddd; /* Light border */
+    border-radius: 8px; /* Rounded corners */
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: transform 0.3s ease; /* Smooth scaling effect */
+    max-width: 300px; /* Limit width of boxes */
   }
   
   .feature-box:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px); /* Slight lift on hover */
   }
   
   .feature-icon {
-    font-size: 2rem;
-    color: #ffdd57;
-    margin-bottom: 0.5rem;
+    font-size: 2.5rem; /* Increase icon size */
+    color: #ffdd57; /* Change icon color */
+    margin-bottom: 0.5rem; /* Space below the icon */
   }
   
   .feature-box h3 {
     font-size: 1.5rem;
-    color: #333;
-    margin: 0.5rem 0;
+    margin: 0.5rem 0; /* Margin above and below the heading */
   }
   
   .feature-box p {
-    color: #666;
-    font-size: 1rem;
-    line-height: 1.6;
+    color: #555; /* Darker gray for text */
+    line-height: 1.4; /* Line height for better readability */
   }
   
