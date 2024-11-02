@@ -34,7 +34,7 @@ const teamMembers = [
   },
   {
     id: 3,
-    name: 'Delisha Aan ',
+    name: 'Delisha-Ann Naicker',
     title: 'COO',
     description: 'Delisha drives our operational strategies, ensuring efficiency and growth.',
     image: COO,

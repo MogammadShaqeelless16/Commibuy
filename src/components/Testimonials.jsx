@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import './Testimonials.css';
 
 const testimonials = [
-  { id: 1, text: "Commibuy has transformed how we reach customers. A fantastic platform for small businesses!", author: "Sarah M." },
-  { id: 2, text: "Easy to use and great for local shopping. Love the community feel!", author: "James R." },
-  { id: 3, text: "A must-have for anyone looking to support local businesses in Cape Town.", author: "Emma L." },
+  { id: 1, text: "Commibuy is revolutionizing local commerce, providing small businesses with unparalleled visibility and support.", author: "TechCrunch" },
+  { id: 2, text: "A game changer for local shopping, Commibuy fosters a sense of community that benefits both consumers and vendors.", author: "The Local News" },
+  { id: 3, text: "With its user-friendly interface and focus on local businesses, Commibuy is a must-try for anyone wanting to support their community.", author: "Business Insider" },
+  { id: 4, text: "Commibuy's platform is bridging the gap between consumers and local entrepreneurs, making it easier to shop locally than ever before.", author: "The Herald" },
 ];
 
 function Testimonials() {
@@ -21,7 +22,7 @@ function Testimonials() {
 
   return (
     <section className="testimonials">
-      <h2>What Our Users Say</h2>
+      <h2>What the Media Says About Us</h2>
       <div className="testimonial-slider">
         <button className="prev" onClick={prevTestimonial}>❮</button>
         <div className="testimonial-content">

@@ -1,18 +1,19 @@
 /* Menu.css */
 
 .menu {
+  background-color: #fff;
+  padding: 15px 30px;
   display: flex;
-  justify-content: center; /* Center the entire menu container */
-  background-color: #f9f9f9;
-  padding: 1rem 0;
+  justify-content: center;
+  box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .menu-container {
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 80%;
+  width: 100%;
   max-width: 1200px;
+  justify-content: space-between;
 }
 
 .menu-logo {
@@ -22,85 +23,63 @@
 
 .logo-image {
   height: 40px;
-  width: auto;
-  margin-right: 0.5rem;
+  margin-right: 10px;
 }
 
 .company-name {
-  color: #444;
-  font-size: 1.2rem;
-  font-weight: bold;
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #333;
+}
+
+.ploy {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #4CAF50; /* Primary color */
 }
 
 .menu-links {
   display: flex;
   align-items: center;
-  gap: 1rem;
 }
 
 .menu-links a {
-  color: #444;
+  color: #333;
   text-decoration: none;
-  font-weight: bold;
-  padding: 0.5rem 0.75rem;
-}
-
-.menu-links a:hover {
-  color: #ffdd57;
-  text-decoration: underline;
+  padding: 0 10px;
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .divider {
-  color: #555;
-  margin: 0 0.5rem;
-  font-weight: bold;
+  color: #ccc;
+  margin: 0 5px;
 }
 
-/* Responsive Styles */
-@media (max-width: 768px) {
-  .menu-container {
-    width: 90%; /* Adjust width on tablets */
-  }
-
-  .menu-links {
-    gap: 0.5rem; /* Reduce spacing between links */
-  }
-
-  .menu-links a {
-    font-size: 1rem;
-    padding: 0.5rem; /* Smaller padding for each link */
-  }
+.auth-links {
+  display: flex;
+  align-items: center;
 }
 
-@media (max-width: 480px) {
-  .menu-container {
-    flex-direction: column;
-    align-items: center;
-    padding: 0.5rem 0; /* Additional padding for compact layout */
-  }
+.login-link {
+  color: #4CAF50;
+  text-decoration: none;
+  margin-right: 15px;
+  font-size: 1rem;
+  font-weight: 500;
+}
 
-  .menu-logo {
-    margin-bottom: 0.75rem; /* Spacing between logo and links on mobile */
-  }
+.signup-button {
+  background-color: #4CAF50;
+  color: #fff;
+  padding: 8px 15px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
 
-  .menu-links {
-    flex-direction: column;
-    gap: 0.25rem; /* Reduced gap for stacked items */
-    align-items: center;
-  }
-
-  .menu-links a {
-    font-size: 0.95rem; /* Slightly smaller font size */
-    padding: 0.4rem 0.6rem;
-  }
-
-  .divider {
-    display: none; /* Hide dividers on mobile for cleaner look */
-  }
-
-  .ploy {
-    color: #7ed957;
-    font-size: 1.2rem;
-    font-weight: bold;
-  }
+.signup-button:hover {
+  background-color: #45a049;
 }

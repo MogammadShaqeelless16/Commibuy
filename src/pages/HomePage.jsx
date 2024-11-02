@@ -14,10 +14,11 @@ function HomePage() {
   return (
     <div className="home-page">
       <HeroBanner />
-      <AppDownload />
+
       <Features />
       <AboutMission />
       <Team />
+      <AppDownload />
       <ContactSubscribe />
       <Testimonials />
     </div>

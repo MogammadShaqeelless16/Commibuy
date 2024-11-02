@@ -1,43 +1,94 @@
 /* Testimonials.css */
 
 .testimonials {
-    padding: 2rem;
-    background-color: #f2f2f2;
-    text-align: center;
+  background-color: #f9f9f9;
+  padding: 60px 20px;
+  text-align: center;
+}
+
+.testimonials h2 {
+  font-size: 2.5rem;
+  color: #333;
+  margin-bottom: 40px;
+  font-weight: 600;
+}
+
+.testimonial-slider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.testimonial-content {
+  max-width: 600px;
+  background-color: #fff;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  font-style: italic;
+  font-size: 1.125rem;
+  color: #555;
+}
+
+.testimonial-content p {
+  margin-bottom: 20px;
+  line-height: 1.6;
+}
+
+.testimonial-content footer {
+  font-size: 1rem;
+  color: #888;
+  font-weight: 500;
+}
+
+button.prev,
+button.next {
+  background-color: transparent;
+  border: none;
+  font-size: 2rem;
+  color: #888;
+  cursor: pointer;
+  padding: 10px;
+  transition: color 0.3s ease;
+}
+
+button.prev:hover,
+button.next:hover {
+  color: #333;
+}
+
+button.prev {
+  position: absolute;
+  left: -50px;
+}
+
+button.next {
+  position: absolute;
+  right: -50px;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+  .testimonials {
+    padding: 40px 10px;
   }
-  
+
   .testimonials h2 {
     font-size: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 30px;
   }
-  
-  .testimonial-slider {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 1rem;
-  }
-  
-  .testimonial-slider button {
-    background: none;
-    border: none;
-    font-size: 2rem;
-    cursor: pointer;
-    color: #888;
-  }
-  
+
   .testimonial-content {
-    max-width: 500px;
-    text-align: center;
+    padding: 20px;
+    font-size: 1rem;
   }
-  
-  .testimonial-content p {
-    font-style: italic;
-    margin-bottom: 0.5rem;
+
+  button.prev {
+    left: -20px;
   }
-  
-  .testimonial-content footer {
-    font-weight: bold;
-    color: #333;
+
+  button.next {
+    right: -20px;
   }
-  
+}

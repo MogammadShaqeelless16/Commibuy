@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import './AboutMission.css';
 
 const images = [
-  '/path-to-image1.jpg',
+  '../aseets/',
   '/path-to-image2.jpg',
   '/path-to-image3.jpg',
   // Add more images as needed
