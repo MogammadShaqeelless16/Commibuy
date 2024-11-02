@@ -1,11 +1,13 @@
-// components/AboutMission.js
 import React, { useState, useEffect } from 'react';
 import './AboutMission.css';
+import slide1 from '../assets/slide1.png';
+import slide2 from '../assets/slide2.jpg';
+import slide3 from '../assets/slide3.jpg';
 
 const images = [
-  '../aseets/',
-  '/path-to-image2.jpg',
-  '/path-to-image3.jpg',
+  slide1, // Directly reference the image path
+  slide2,
+  slide3,
   // Add more images as needed
 ];
 
@@ -31,7 +33,7 @@ function AboutMission() {
         </p>
       </div>
       <div className="mission-gallery">
-        <img src={images[currentImageIndex]} alt="Our Mission" />
+        <img src={images[currentImageIndex]} alt="Our Mission" className="mission-image" />
       </div>
     </section>
   );
