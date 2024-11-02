@@ -2,27 +2,85 @@
 
 .team {
     padding: 2rem;
+    background-color: #f9f9f9;
     text-align: center;
-    background-color: #ffffff;
   }
   
   .team h2 {
     font-size: 2rem;
-    margin-bottom: 1rem;
+    margin-bottom: 1.5rem;
+    color: #333;
   }
   
   .team-members {
     display: flex;
     justify-content: space-around;
-    gap: 1rem;
-    flex-wrap: wrap;
+    flex-wrap: wrap; /* Allows items to wrap on smaller screens */
   }
   
   .team-member {
-    flex: 1 1 30%;
-    padding: 1rem;
-    border: 1px solid #ddd;
+    background: white;
     border-radius: 8px;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 1rem;
+    margin: 1rem;
+    flex: 1 1 30%; /* Flex-grow, flex-shrink, and flex-basis */
+    max-width: 300px; /* Prevents it from growing too large */
+    transition: transform 0.3s;
+  }
+  
+  .team-member:hover {
+    transform: translateY(-5px); /* Lift effect on hover */
+  }
+  
+  .member-image {
+    width: 100%;
+    height: auto;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+  }
+  
+  .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 1rem; /* Space between icons */
+  }
+  
+  .social-icon {
+    width: 24px; /* Icon size */
+    height: 24px;
+  }
+  
+  /* Responsive Styles */
+  @media (max-width: 768px) {
+    .team h2 {
+      font-size: 1.8rem; /* Adjust heading size for tablets */
+    }
+  
+    .team-member {
+      flex: 1 1 45%; /* Allow 2 members per row on medium screens */
+      max-width: 45%; /* Ensure it does not grow too large */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .team {
+      padding: 1.5rem; /* Reduce padding for mobile */
+    }
+  
+    .team h2 {
+      font-size: 1.5rem; /* Further reduce heading size for small screens */
+    }
+  
+    .team-member {
+      flex: 1 1 100%; /* Stack members on top of each other */
+      max-width: 100%; /* Full width on small screens */
+      margin: 0.5rem 0; /* Reduce margin */
+    }
+  
+    .social-icon {
+      width: 20px; /* Smaller icons for mobile */
+      height: 20px;
+    }
   }
   
