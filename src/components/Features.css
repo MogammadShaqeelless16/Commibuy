@@ -1,0 +1,55 @@
+/* Features.css */
+
+.features {
+    padding: 2rem;
+    text-align: center;
+    background-color: #ffffff;
+  }
+  
+  .features h2 {
+    font-size: 2rem;
+    margin-bottom: 1.5rem;
+    color: #333;
+  }
+  
+  .feature-boxes {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  
+  .feature-box {
+    flex: 1 1 250px;
+    padding: 2rem;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border-radius: 12px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    max-width: 300px;
+  }
+  
+  .feature-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+  }
+  
+  .feature-icon {
+    font-size: 2rem;
+    color: #ffdd57;
+    margin-bottom: 0.5rem;
+  }
+  
+  .feature-box h3 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0.5rem 0;
+  }
+  
+  .feature-box p {
+    color: #666;
+    font-size: 1rem;
+    line-height: 1.6;
+  }
+  

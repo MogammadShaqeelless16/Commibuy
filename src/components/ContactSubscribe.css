@@ -1,0 +1,37 @@
+/* ContactSubscribe.css */
+
+.contact-subscribe {
+    padding: 2rem;
+    text-align: center;
+    background-color: #ffffff;
+  }
+  
+  .contact-subscribe h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .contact-subscribe form {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1rem;
+  }
+  
+  .contact-subscribe input[type="email"] {
+    padding: 0.7rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    width: 250px;
+  }
+  
+  .contact-subscribe .btn {
+    padding: 0.7rem 1.5rem;
+    background-color: #ffdd57;
+    color: #333;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  

@@ -1,0 +1,24 @@
+/* AppDownload.css */
+
+.app-download {
+    padding: 2rem;
+    text-align: center;
+    background-color: #f9f9f9;
+  }
+  
+  .app-download h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+  
+  .download-buttons .btn {
+    padding: 0.7rem 1.5rem;
+    margin: 0.5rem;
+    background-color: #ffdd57;
+    color: #333;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  

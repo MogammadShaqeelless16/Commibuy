@@ -1,0 +1,52 @@
+/* HeroBanner.css */
+
+.hero-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 2rem;
+    background-color: #f9f9f9;
+  }
+  
+  .hero-text {
+    flex: 1;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 2rem;
+  }
+  
+  .hero-text h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+  
+  .hero-text p {
+    font-size: 1.2rem;
+    align-items: center;
+    justify-content: space-between;
+    color: #555;
+    margin-bottom: 1.5rem;
+  }
+  
+  .btn {
+    padding: 0.7rem 1.5rem;
+    background-color: #ffdd57;
+    color: #333;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    text-transform: uppercase;
+  }
+  
+  .hero-image {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .hero-image img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+  }
+  
