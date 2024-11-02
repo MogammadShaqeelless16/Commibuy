@@ -1,5 +1,7 @@
 import React from 'react';
+import { FaLinkedin, FaTwitter, FaGithub } from 'react-icons/fa'; // Importing icons from react-icons
 import './Team.css';
+
 import CEO from '../assets/team/CEOMalakai.png';
 import COO from '../assets/team/COODelisha.png';
 import CTO from '../assets/team/CTOShaqeel.png';
@@ -11,10 +13,11 @@ const teamMembers = [
     name: 'Malakai Johnson',
     title: 'CEO',
     description: 'Malakai is the visionary behind our company, dedicated to empowering local businesses.',
-    image: CEO, // Correct image import
+    image: CEO,
     socialLinks: {
       linkedin: 'https://www.linkedin.com/in/malakailink',
       twitter: 'https://twitter.com/malakai',
+      github: 'https://github.com/malakai',
     },
   },
   {
@@ -22,10 +25,11 @@ const teamMembers = [
     name: 'Shaqeel Less',
     title: 'CTO',
     description: 'Shaqeel leads our tech team with a focus on innovation and sustainability.',
-    image: CTO, // Correct image import
+    image: CTO,
     socialLinks: {
       linkedin: 'https://www.linkedin.com/in/shaqeellink',
       twitter: 'https://twitter.com/shaqeel',
+      github: 'https://github.com/shaqeel',
     },
   },
   {
@@ -33,10 +37,11 @@ const teamMembers = [
     name: 'Delisha Smith',
     title: 'COO',
     description: 'Delisha drives our operational strategies, ensuring efficiency and growth.',
-    image: COO, // Correct image import
+    image: COO,
     socialLinks: {
       linkedin: 'https://www.linkedin.com/in/delishasmith',
       twitter: 'https://twitter.com/delisha',
+      github: 'https://github.com/delisha',
     },
   },
 ];
@@ -54,10 +59,13 @@ function Team() {
             <p>{member.description}</p>
             <div className="social-links">
               <a href={member.socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
-                <img src="/path-to-linkedin-icon.svg" alt="LinkedIn" className="social-icon" />
+                <FaLinkedin className="social-icon" />
               </a>
               <a href={member.socialLinks.twitter} target="_blank" rel="noopener noreferrer">
-                <img src="/path-to-twitter-icon.svg" alt="Twitter" className="social-icon" />
+                <FaTwitter className="social-icon" />
+              </a>
+              <a href={member.socialLinks.github} target="_blank" rel="noopener noreferrer">
+                <FaGithub className="social-icon" />
               </a>
             </div>
           </div>

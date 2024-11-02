@@ -3,7 +3,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import phone from '../assets/phone.png';
 import './HeroBanner.css';
-import ArtBackground from '../components/ArtBackground';
 
 function HeroBanner() {
   return (
