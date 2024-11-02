@@ -24,6 +24,50 @@ function EditBusinessModal({ editForm, onChange, onSave, onCancel }) {
           </div>
         </div>
 
+                {/* Contact Number */}
+                <div className="form-group">
+          <div className="input-container">
+            <input
+              type="text"
+              name="contact_number"
+              className="modal-input"
+              id="contact_number"
+              value={editForm.contact_number || ''}
+              onChange={onChange}
+              required
+            />
+            <label htmlFor="contact_number" className="modal-label">Contact Number</label>
+          </div>
+        </div>
+
+        <div className="form-group">
+  <label htmlFor="primary_colour" className="modal-color-picker-label">Primary Colour</label>
+  <div className="modal-color-picker-container">
+    <input
+      type="color"
+      name="primary_colour"
+      className="modal-color-picker"
+      id="primary_colour"
+      value={editForm.primary_colour || '#ffcc00'}
+      onChange={onChange}
+    />
+  </div>
+</div>
+
+<div className="form-group">
+  <label htmlFor="secondary_colour" className="modal-color-picker-label">Secondary Colour</label>
+  <div className="modal-color-picker-container">
+    <input
+      type="color"
+      name="secondary_colour"
+      className="modal-color-picker"
+      id="secondary_colour"
+      value={editForm.secondary_colour || '#333333'}
+      onChange={onChange}
+    />
+  </div>
+</div>
+
         <div className="form-group">
           <div className="input-container">
             <textarea
@@ -212,9 +256,10 @@ function EditBusinessModal({ editForm, onChange, onSave, onCancel }) {
               value={editForm.template || 'template1'}
               onChange={onChange}
             >
-              <option value="template1">Template 1</option>
-              <option value="template2">Template 2</option>
-              <option value="template3">Template 3</option>
+              <option value="template1">Standard Plan</option>
+              <option value="template2">Gallary</option>
+              <option value="template3">Service Showcase</option>
+              <option value="template2">Product Showcase</option>
             </select>
             <label htmlFor="template" className="modal-label">Template</label>
           </div>
