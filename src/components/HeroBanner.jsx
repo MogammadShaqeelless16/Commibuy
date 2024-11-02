@@ -9,7 +9,7 @@ function HeroBanner() {
 
     <section className="hero-banner">
       <div className="hero-text">
-        <h1>Welcome to Commibuy</h1>
+        <h1>Welcome to Commiploy</h1>
         <p>Your gateway to discovering and supporting local businesses.</p>
         <Link to="/signup" className="btn">Get Started</Link>
       </div>

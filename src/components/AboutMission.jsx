@@ -25,7 +25,7 @@ function AboutMission() {
       <div className="mission-text">
         <h2>Our Mission</h2>
         <p>
-          At Commibuy, our mission is to empower local businesses by connecting them with their communities.
+          At Commiploy, our mission is to empower local businesses by connecting them with their communities.
           We provide a platform for small businesses to thrive, offering users a seamless way to discover, shop,
           and support businesses in their local area.
         </p>

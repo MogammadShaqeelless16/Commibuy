@@ -8,7 +8,7 @@ function AboutPage() {
     <div className="about-page">
       <h1>About Commibuy</h1>
       <p>
-        <strong>Welcome to Commibuy!</strong> We are a Cape Town-based platform dedicated to connecting you with local businesses and products. Our mission is to empower small businesses in your area by offering a seamless online shopping experience.
+        <strong>Welcome to Commiploy!</strong> We are a Cape Town-based platform dedicated to connecting you with local businesses and products. Our mission is to empower small businesses in your area by offering a seamless online shopping experience.
       </p>
       <p>
         At Commibuy, we specialize in online transactions, making it easy for you to purchase products from your favorite local businesses without leaving your home. Our platform is designed to promote and support small businesses, providing them with the exposure they need to thrive and succeed.
@@ -20,7 +20,7 @@ function AboutPage() {
         We do charge a small percentage on the products you sell to cover our costs and maintain the platform’s quality. This fee helps us continue supporting local businesses and enhancing your shopping experience.
       </p>
       <p>
-        Thank you for choosing Commibuy. Together, we can make a difference in the local economy and support the growth of small businesses in Cape Town.
+        Thank you for choosing Commiploy. Together, we can make a difference in the local economy and support the growth of small businesses in Cape Town.
       </p>
     </div>
   );
