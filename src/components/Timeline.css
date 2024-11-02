@@ -1,0 +1,126 @@
+.timeline {
+    padding: 40px;
+    max-width: 90%;
+    margin: 0 auto;
+    text-align: center;
+  }
+  
+  .timeline h2 {
+    font-size: 2rem;
+    margin-bottom: 2rem;
+    color: #333;
+  }
+  
+  /* Container for the timeline */
+  .timeline-container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 0;
+    overflow: hidden;
+  }
+  
+  /* Styling for the line with gradient effect */
+  .timeline-line {
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    height: 4px;
+    background: linear-gradient(to right, #009688, #4caf50);
+    border-radius: 2px;
+    z-index: 1;
+  }
+  
+  /* Timeline point */
+  .timeline-point {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    z-index: 2;
+    text-align: center;
+    padding: 10px;
+  }
+  
+  /* Circular point marker with animation on hover */
+  .point-marker {
+    width: 24px;
+    height: 24px;
+    background-color: #ffffff;
+    border: 5px solid #009688;
+    border-radius: 50%;
+    position: relative;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+  }
+  
+  .point-marker:hover {
+    transform: scale(1.2);
+  }
+  
+  .year {
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #4caf50;
+  }
+  
+  /* Labels above the markers */
+  .label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+  }
+  
+  /* Hidden event details, shown on hover */
+  .event-details {
+    position: absolute;
+    top: 60px;
+    width: 220px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    padding: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    z-index: 3;
+  }
+  
+  .point-marker:hover + .event-details,
+  .timeline-point:hover .event-details {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .event-description {
+    font-size: 0.85rem;
+    color: #666;
+    margin-top: 4px;
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    .timeline-container {
+      flex-direction: column;
+    }
+  
+    .timeline-line {
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, #009688, #4caf50);
+    }
+  
+    .timeline-point {
+      margin-bottom: 20px;
+      align-items: flex-start;
+    }
+  
+    .event-details {
+      top: 20px;
+      left: 40px;
+    }
+  }
+  

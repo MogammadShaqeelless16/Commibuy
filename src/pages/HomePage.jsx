@@ -8,6 +8,8 @@ import Team from '../components/Team';
 import AppDownload from '../components/AppDownload';
 import ContactSubscribe from '../components/ContactSubscribe';
 import Testimonials from '../components/Testimonials';
+import Timeline from '../components/Timeline'
+import Pricing from '../components/Pricing'
 
 
 function HomePage() {
@@ -17,10 +19,13 @@ function HomePage() {
 
       <Features />
       <AboutMission />
+      <Timeline />
+      <Pricing />
       <Team />
       <AppDownload />
-      <ContactSubscribe />
+
       <Testimonials />
+      <ContactSubscribe />
     </div>
   );
 }

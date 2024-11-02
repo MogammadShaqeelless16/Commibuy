@@ -1,4 +1,3 @@
-// components/Testimonials.js
 import React, { useState } from 'react';
 import './Testimonials.css';
 
@@ -7,6 +6,7 @@ const testimonials = [
   { id: 2, text: "A game changer for local shopping, Commibuy fosters a sense of community that benefits both consumers and vendors.", author: "The Local News" },
   { id: 3, text: "With its user-friendly interface and focus on local businesses, Commibuy is a must-try for anyone wanting to support their community.", author: "Business Insider" },
   { id: 4, text: "Commibuy's platform is bridging the gap between consumers and local entrepreneurs, making it easier to shop locally than ever before.", author: "The Herald" },
+  { id: 5, text: "Commiploy is a platform that enables communities to purchase local products, access services, and apply for various odd jobs.", author: "ITWeb" }
 ];
 
 function Testimonials() {

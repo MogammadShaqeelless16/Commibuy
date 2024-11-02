@@ -4,16 +4,17 @@
   background-color: #fff;
   padding: 15px 30px;
   display: flex;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
   box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1000; /* Ensure menu is on top */
 }
 
 .menu-container {
   display: flex;
   align-items: center;
   width: 100%;
-  max-width: 1200px;
-  justify-content: space-between;
 }
 
 .menu-logo {
@@ -26,34 +27,34 @@
   margin-right: 10px;
 }
 
-.company-name {
+.company-name, .ploy {
   font-size: 1.5rem;
   font-weight: 700;
   color: #333;
 }
 
 .ploy {
-  font-size: 1.5rem;
-  font-weight: 700;
   color: #4CAF50; /* Primary color */
 }
 
 .menu-links {
   display: flex;
   align-items: center;
+  flex-grow: 1; /* Allow menu links to grow */
+  justify-content: center; /* Center links */
 }
 
 .menu-links a {
   color: #333;
   text-decoration: none;
-  padding: 0 10px;
+  padding: 10px 15px;
   font-size: 1rem;
   font-weight: 500;
+  transition: color 0.3s;
 }
 
-.divider {
-  color: #ccc;
-  margin: 0 5px;
+.menu-links a:hover {
+  color: #4CAF50; /* Change color on hover */
 }
 
 .auth-links {
@@ -82,4 +83,74 @@
 
 .signup-button:hover {
   background-color: #45a049;
+}
+
+/* Hamburger Styles */
+.hamburger {
+  display: none; /* Hidden by default */
+  flex-direction: column;
+  cursor: pointer;
+  margin-left: 15px; /* Space between hamburger and buttons */
+}
+
+.line {
+  width: 25px;
+  height: 3px;
+  background-color: #333;
+  margin: 3px 0;
+  transition: all 0.3s ease; /* Smooth transition */
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .menu {
+    padding: 10px 15px;
+  }
+
+  .menu-links {
+    flex-direction: column; /* Stack links on mobile */
+    width: 100%;
+    align-items: center;
+    padding: 10px 0;
+    display: none; /* Initially hide on mobile */
+    position: absolute; /* Position menu */
+    top: 100%; /* Align below the menu */
+    left: 0; /* Align to the left */
+    background: white; /* Background color */
+    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1); /* Add shadow */
+    z-index: 100; /* Ensure visibility */
+  }
+
+  .menu-links.open {
+    display: flex; /* Show when open */
+  }
+
+  .hamburger {
+    display: flex; /* Show hamburger on mobile */
+  }
+
+  /* Style for login and signup buttons in mobile view */
+  .login-link,
+  .signup-button {
+    width: 100%; /* Full width for buttons */
+    margin: 5px 0; /* Margin between buttons */
+    text-align: center; /* Center text */
+    padding: 10px 0; /* Padding for better click area */
+    font-size: 1rem; /* Consistent font size */
+  }
+
+  /* Optional: Style for when hamburger menu is open */
+  .hamburger.open .line:nth-child(1) {
+    transform: rotate(45deg);
+    margin-bottom: 0; /* Eliminate margin */
+  }
+
+  .hamburger.open .line:nth-child(2) {
+    opacity: 0; /* Hide the middle line */
+  }
+
+  .hamburger.open .line:nth-child(3) {
+    transform: rotate(-45deg);
+    margin-top: 0; /* Eliminate margin */
+  }
 }

@@ -13,7 +13,6 @@
 }
 
 .pricing-cards {
-  display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Grid layout for responsiveness */
   gap: 30px; /* Space between the cards */
 }

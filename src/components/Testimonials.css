@@ -1,16 +1,15 @@
-/* Testimonials.css */
-
 .testimonials {
-  background-color: #f9f9f9;
-  padding: 60px 20px;
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
   text-align: center;
+  color: #333;
 }
 
 .testimonials h2 {
-  font-size: 2.5rem;
-  color: #333;
-  margin-bottom: 40px;
-  font-weight: 600;
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  color: #009688;
 }
 
 .testimonial-slider {
@@ -21,74 +20,60 @@
 }
 
 .testimonial-content {
+  padding: 20px;
+  background-color: #f9f9f9;
+  border-radius: 12px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
   max-width: 600px;
-  background-color: #fff;
-  border-radius: 8px;
-  padding: 30px;
-  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-  font-style: italic;
-  font-size: 1.125rem;
-  color: #555;
-}
-
-.testimonial-content p {
-  margin-bottom: 20px;
+  transition: all 0.3s ease;
+  font-size: 1rem;
   line-height: 1.6;
 }
 
+.testimonial-content p {
+  margin-bottom: 1rem;
+  color: #555;
+}
+
 .testimonial-content footer {
-  font-size: 1rem;
-  color: #888;
-  font-weight: 500;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #666;
 }
 
-button.prev,
-button.next {
-  background-color: transparent;
-  border: none;
-  font-size: 2rem;
-  color: #888;
+/* Navigation buttons */
+button.prev, button.next {
+  background-color: #009688;
   cursor: pointer;
-  padding: 10px;
-  transition: color 0.3s ease;
+  margin: 0 10px;
+  transition: background-color 0.3s ease;
 }
 
-button.prev:hover,
-button.next:hover {
-  color: #333;
+button.prev:hover, button.next:hover {
+  background-color: #00695c;
 }
 
-button.prev {
-  position: absolute;
-  left: -50px;
+/* Animation for text changes */
+.testimonial-content {
+  opacity: 0;
+  animation: fade-in 0.5s forwards;
 }
 
-button.next {
-  position: absolute;
-  right: -50px;
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* Responsive Adjustments */
+/* Responsive adjustments */
 @media (max-width: 768px) {
-  .testimonials {
-    padding: 40px 10px;
-  }
-
-  .testimonials h2 {
-    font-size: 2rem;
-    margin-bottom: 30px;
-  }
-
   .testimonial-content {
-    padding: 20px;
-    font-size: 1rem;
+    max-width: 90%;
+    font-size: 0.9rem;
   }
-
-  button.prev {
-    left: -20px;
-  }
-
-  button.next {
-    right: -20px;
+  
+  button.prev, button.next {
+    width: 32px;
+    height: 32px;
+    font-size: 1.2rem;
   }
 }
