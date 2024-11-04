@@ -32,7 +32,7 @@ const pricingPlans = [
     title: "Pro",
     features: [
       { feature: "Landing Page Builder", available: true },
-      { feature: "External Domain Support", available: true },
+      { feature: "Lead Feed Automation", available: true },
       { feature: "CRM", available: true },
       { feature: "Manual Leads Management", available: true },
       { feature: "Analytics", available: "Advanced" },
