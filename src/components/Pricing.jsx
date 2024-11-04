@@ -25,7 +25,7 @@ const pricingPlans = [
       { feature: "Analytics", available: "Basic" },
       { feature: "Support", available: "Email & Chat" },
     ],
-    price: "$29/month",
+    price: "R250/month",
     highlight: true,
   },
   {
@@ -38,7 +38,7 @@ const pricingPlans = [
       { feature: "Analytics", available: "Advanced" },
       { feature: "Support", available: "Priority Support" },
     ],
-    price: "$59/month",
+    price: "Custom/month",
     highlight: false,
   },
 ];
