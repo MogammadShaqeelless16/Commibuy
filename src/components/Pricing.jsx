@@ -20,7 +20,7 @@ const pricingPlans = [
     features: [
       { feature: "Landing Page Builder", available: true },
       { feature: "External Domain Support", available: true },
-      { feature: "CRM", available: false },
+      { feature: "CRM", available: true },
       { feature: "Manual Leads Management", available: true },
       { feature: "Analytics", available: "Basic" },
       { feature: "Support", available: "Email & Chat" },
