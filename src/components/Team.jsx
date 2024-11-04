@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaLinkedin, FaTwitter, FaGithub } from 'react-icons/fa'; // Importing icons from react-icons
+import { FaLinkedin, FaGithub, FaTimes } from 'react-icons/fa'; // Importing icons from react-icons
 import './Team.css';
 
 import CEO from '../assets/team/CEOMalakai.png';
@@ -16,7 +16,7 @@ const teamMembers = [
     image: CEO,
     socialLinks: {
       linkedin: 'https://www.linkedin.com/in/malakailink',
-      twitter: 'https://twitter.com/malakai',
+      x: 'https://twitter.com/malakai', // Assuming this is the new URL for X
       github: 'https://github.com/malakai',
     },
   },
@@ -28,7 +28,7 @@ const teamMembers = [
     image: CTO,
     socialLinks: {
       linkedin: 'https://www.linkedin.com/in/shaqeellink',
-      twitter: 'https://twitter.com/shaqeel',
+      x: 'https://twitter.com/shaqeel', // Assuming this is the new URL for X
       github: 'https://github.com/shaqeel',
     },
   },
@@ -40,7 +40,7 @@ const teamMembers = [
     image: COO,
     socialLinks: {
       linkedin: 'https://www.linkedin.com/in/delishasmith',
-      twitter: 'https://twitter.com/delisha',
+      x: 'https://twitter.com/delisha', // Assuming this is the new URL for X
       github: 'https://github.com/delisha',
     },
   },
@@ -61,8 +61,8 @@ function Team() {
               <a href={member.socialLinks.linkedin} target="_blank" rel="noopener noreferrer">
                 <FaLinkedin className="social-icon" />
               </a>
-              <a href={member.socialLinks.twitter} target="_blank" rel="noopener noreferrer">
-                <FaTwitter className="social-icon" />
+              <a href={member.socialLinks.x} target="_blank" rel="noopener noreferrer">
+                <FaTimes className="social-icon" /> {/* Placeholder for X icon */}
               </a>
               <a href={member.socialLinks.github} target="_blank" rel="noopener noreferrer">
                 <FaGithub className="social-icon" />
