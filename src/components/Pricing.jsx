@@ -3,7 +3,7 @@ import './Pricing.css';
 
 const pricingPlans = [
   {
-    title: "Free",
+    title: "Freemium",
     features: [
       { feature: "Landing Page Builder", available: true },
       { feature: "Point of Sale System", available: true },
