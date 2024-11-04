@@ -21,7 +21,7 @@ function Menu() {
         </div>
         <div className={`menu-links ${isOpen ? 'open' : ''}`}>
           <Link to="/" onClick={() => setIsOpen(false)}>Home</Link>
-          <Link to="/media" onClick={() => setIsOpen(false)}>Publication</Link>
+          <Link to="/media" onClick={() => setIsOpen(false)}>Media</Link>
           <Link to="/about" onClick={() => setIsOpen(false)}>About</Link>
           <Link to="/contact" onClick={() => setIsOpen(false)}>Contact</Link>
         </div>

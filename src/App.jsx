@@ -24,6 +24,7 @@ import CrmServices from './pages/crm/CrmServices';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import ProtectedRoute from './components/ProtectedRoute';
 import PricingPage from './pages/PricingPage';
+import MediaPage from './pages/MediaPage';
 
 function LayoutWrapper({ children }) {
   const location = useLocation();
@@ -49,6 +50,7 @@ function App() {
             <Route path="/" element={<HomePage />} />
             <Route path="/about" element={<AboutPage />} />
             <Route path="/contact" element={<ContactPage />} />
+            <Route path="/media" element={<MediaPage />} />
             <Route path="/login" element={<LoginPage />} />
             <Route path="/signup" element={<SignUpPage />} />
             <Route path="/forgot-password" element={<ForgotPasswordPage />} />
