@@ -12,10 +12,10 @@ function AppDownload() {
         Experience the convenience of local shopping on the go! Our mobile app allows you to discover and support local businesses with ease.
       </p>
       <div className="download-buttons">
-        <a href="https://play.google.com" target="_blank" rel="noopener noreferrer" className="download-btn">
+        <a href="https://commiploy.netlify.app/" target="_blank" rel="noopener noreferrer" className="download-btn">
           <img src={googlePlayIcon} alt="Download on Google Play" className="download-icon" />
         </a>
-        <a href="https://www.apple.com/app-store/" target="_blank" rel="noopener noreferrer" className="download-btn">
+        <a href="https://commiploy.netlify.app/" target="_blank" rel="noopener noreferrer" className="download-btn">
           <img src={appStoreIcon} alt="Download on the App Store" className="download-icon" />
         </a>
       </div>
