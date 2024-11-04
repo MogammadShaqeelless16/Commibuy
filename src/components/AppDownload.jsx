@@ -9,7 +9,7 @@ function AppDownload() {
     <section className="app-download">
       <h2>Download Our Mobile App for Free</h2>
       <p>
-      Experience the convenience of local shopping on the go! Our mobile app allows you to discover and support local businesses with ease. Additionally, you can hire people from the local community for various jobs, making it simple to find help for any tasks you need completed.
+      Discover local businesses and hire community members for tasks with our mobile app, streamlining your shopping and support for the local economy.
       </p>
       <div className="download-buttons">
         <a href="https://commiploy.netlify.app/" target="_blank" rel="noopener noreferrer" className="download-btn">
