@@ -6,7 +6,7 @@ const pricingPlans = [
     title: "Free",
     features: [
       { feature: "Landing Page Builder", available: true },
-      { feature: "External Domain Support", available: false },
+      { feature: "Point of Sale System", available: true },
       { feature: "CRM", available: false },
       { feature: "Manual Leads Management", available: false },
       { feature: "Analytics", available: false },
