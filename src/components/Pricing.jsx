@@ -8,7 +8,7 @@ const pricingPlans = [
       { feature: "Landing Page Builder", available: true },
       { feature: "Point of Sale System", available: true },
       { feature: "CRM", available: false },
-      { feature: "Manual Leads Management", available: false },
+      { feature: "Internal Domain", available: true },
       { feature: "Analytics", available: false },
       { feature: "Support", available: "Email" },
     ],
